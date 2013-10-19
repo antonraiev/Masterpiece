@@ -73,9 +73,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\ControlModel.h" />
+    <ClInclude Include="include\Granule.h" />
+    <ClInclude Include="include\Sensor.h" />
     <ClInclude Include="include\SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ControlModel.cpp" />
+    <ClCompile Include="src\Sensor.cpp" />
     <ClCompile Include="src\SensorMemory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
