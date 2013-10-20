@@ -14,8 +14,10 @@ namespace Core
         }
 
         std::vector<Granule> granules;
-        for(double d = lowerBound; d <= upperBound; ) {
-            Granule granule(d, d = std::min(upperBound, d + granuleSize), -1);
+        for(double d = lowerBound; d < upperBound; ) {
+            double granuleLowerBound = d;
+            d = std::min(upperBound, d + granuleSize);
+            Granule granule(granuleLowerBound, d, -1);
             granules.push_back(granule);
         }
         layers.push_back(granules);
@@ -23,20 +25,26 @@ namespace Core
 
     void SensorMemory::addLayer(size_t granuleCount)
     {
-        if(granuleCount > layers.back().size()) {
-            throw std::exception("The amount of granules to use for the new layer"
-                " should be not greater than the amount of granules in previous layer");
+        std::vector<Granule> prevLayer = layers.back();
+        if(granuleCount > prevLayer.size()) {
+            granuleCount = prevLayer.size();
         }
 
         std::vector<Granule> granules;
-        for(size_t i = 0; i < layers.back().size(); ) {
-            double maxFuzzyFactor = std::max_element(layers.back().begin() + i,
-                layers.back().begin() + i + granuleCount,
+
+        for(size_t i = 0; i < prevLayer.size(); ++i) {
+            size_t nextIndex = std::min(i + granuleCount - 1, prevLayer.size() - 1);
+            double maxFuzzyFactor = std::max_element(prevLayer.begin() + i,
+                prevLayer.begin() + nextIndex,
                 [] (const Granule &first, const Granule &second) -> bool
             {
                 return first.fuzzyFactor < second.fuzzyFactor;
             })->fuzzyFactor;
-            Granule granule(i, i += granuleCount, maxFuzzyFactor);
+
+            double granuleLowerBound = prevLayer[i].lowerBound;
+            i = nextIndex;
+            double granuleUpperBound = prevLayer[i].upperBound;
+            Granule granule(granuleLowerBound, granuleUpperBound, maxFuzzyFactor);
             granules.push_back(granule);
         }
         layers.push_back(granules);
