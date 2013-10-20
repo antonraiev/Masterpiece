@@ -62,9 +62,7 @@ namespace Core
         * A fuzzy truth value [-1..1]
         */
         float beta;
-
         std::vector<std::vector<Granule> > layers;
-        size_t layerCount;
     };
 } // namespace Core
 
