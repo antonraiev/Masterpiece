@@ -17,8 +17,9 @@ namespace Core
         /** 
         * Create new ControlModel for a specified sensor
         * @param sensor The sensor which the model will use
+        * @param granuleSize Size of the granule in sensor memory
 	    */
-        explicit ControlModel(Sensor sensor);
+        explicit ControlModel(Sensor sensor, double granuleSize);
 
         /** 
         * Get the sensor used by the model

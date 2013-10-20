@@ -2,9 +2,9 @@
 
 namespace Core 
 {
-    ControlModel::ControlModel(Sensor sensor) :
+    ControlModel::ControlModel(Sensor sensor, double granuleSize) :
         sensor(sensor),
-        sensorMemory(sensor.getLowerBound(), sensor.getUpperBound(), 5)
+        sensorMemory(sensor.getLowerBound(), sensor.getUpperBound(), granuleSize)
     {
     }
 
