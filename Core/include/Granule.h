@@ -11,6 +11,13 @@ namespace Core
         double lowerBound;
         double upperBound;
         double fuzzyFactor;
+
+        Granule(double lowerBound, double upperBound, double fuzzyFactor) :
+            lowerBound(lowerBound),
+            upperBound(upperBound),
+            fuzzyFactor(fuzzyFactor)
+        {
+        }
     };
 } // namespace Core
 
