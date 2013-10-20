@@ -4,7 +4,7 @@ namespace Core
 {
     ControlModel::ControlModel(Sensor sensor) :
         sensor(sensor),
-       sensorMemory(sensor.getLowerBound(), sensor.getUpperBound(), 5)
+        sensorMemory(sensor.getLowerBound(), sensor.getUpperBound(), 5)
     {
     }
 
@@ -20,5 +20,7 @@ namespace Core
 
     void ControlModel::update()
     {
+        sensor.update();
+        sensorMemory.update(sensor.getValue());
     }
 } // namespace Core
