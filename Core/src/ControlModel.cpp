@@ -8,12 +8,14 @@ namespace Core
     {
     }
 
-    Sensor ControlModel::getSensor() const
+    const Sensor& ControlModel::getSensor() const
     {
+        return sensor;
     }
 
-    SensorMemory ControlModel::getSensorMemory() const
+    const SensorMemory& ControlModel::getSensorMemory() const
     {
+        return sensorMemory;
     }
 
     void ControlModel::update()

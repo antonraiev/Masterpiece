@@ -24,13 +24,13 @@ namespace Core
         * Get the sensor used by the model
         * @returns The sensor used by the model
 	    */
-        Sensor getSensor() const;
+        const Sensor& getSensor() const;
 
         /** 
         * Get the sensor memory
         * @returns The sensor memory 
         */
-        SensorMemory getSensorMemory() const;
+        const SensorMemory& getSensorMemory() const;
 
         /** 
         * Update all model data (The value from sensor, the sensor memory and so on)
