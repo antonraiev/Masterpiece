@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SensorMemoryWrapper.h">
+    <ClInclude Include="Granule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -23,7 +26,7 @@
     <ClCompile Include="AssemblyInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SensorMemoryWrapper.cpp">
+    <ClCompile Include="SensorMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

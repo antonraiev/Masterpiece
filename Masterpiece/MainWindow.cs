@@ -15,8 +15,9 @@ namespace Mastepiece
         public MainWindow()
         {
             InitializeComponent();
-            CoreWrapper.SensorMemoryWrapper sensorMemory = new CoreWrapper.SensorMemoryWrapper();
-            valueBox.Text += sensorMemory.getSomeValue();
+            CoreWrapper.SensorMemory sensorMemory = new CoreWrapper.SensorMemory(0, 30, 10);
+            sensorMemory.Update(12.5);
+            valueBox.Text += sensorMemory.GetGranules(0)[1].FuzzyFactor;
         }
     }
 }

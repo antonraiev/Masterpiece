@@ -84,11 +84,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SensorMemoryWrapper.h" />
+    <ClInclude Include="Granule.h" />
+    <ClInclude Include="SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="SensorMemoryWrapper.cpp" />
+    <ClCompile Include="SensorMemory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
