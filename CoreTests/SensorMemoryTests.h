@@ -101,5 +101,25 @@ namespace CoreTests
         }
     }
 
+    TEST_F(SensorMemoryTests, testUpdate)
+    {
+        double eps = 0.001;
+        Core::SensorMemory sensorMemory(0, 30, 10);
+        sensorMemory.update(10);
+        ASSERT_NEAR(-0.05, sensorMemory.getGranules()[0].fuzzyFactor, eps);
+        ASSERT_NEAR(0.05, sensorMemory.getGranules()[1].fuzzyFactor, eps);
+        ASSERT_NEAR(-0.95, sensorMemory.getGranules()[2].fuzzyFactor, eps);
 
+        sensorMemory.update(12.5);
+        ASSERT_NEAR(-0.45, sensorMemory.getGranules()[0].fuzzyFactor, eps);
+        ASSERT_NEAR(0.45, sensorMemory.getGranules()[1].fuzzyFactor, eps);
+
+        sensorMemory.update(15);
+        ASSERT_NEAR(-0.95, sensorMemory.getGranules()[0].fuzzyFactor, eps);
+        ASSERT_NEAR(0.95, sensorMemory.getGranules()[1].fuzzyFactor, eps);
+
+        sensorMemory.update(20);
+        ASSERT_NEAR(-0.05, sensorMemory.getGranules()[1].fuzzyFactor, eps);
+        ASSERT_NEAR(0.05, sensorMemory.getGranules()[2].fuzzyFactor, eps);
+    }
 } // namespace CoreTests

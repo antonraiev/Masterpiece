@@ -73,6 +73,41 @@ namespace Core
 
     void SensorMemory::update(double value)
     {
+        double eps = 0.05;
+        size_t layerCount = layers.size();
+        std::vector<Granule> &bottomLayer = layers.front();
 
+        for(size_t i = 0; i < bottomLayer.size(); ++i) {
+            double granuleDelta = bottomLayer[i].upperBound 
+                - bottomLayer[i].lowerBound;
+
+            if(value >= bottomLayer[i].lowerBound 
+                && value <= bottomLayer[i].lowerBound + granuleDelta / 2) 
+            {
+                double granuleSigma = bottomLayer[i].lowerBound 
+                    + (granuleDelta / 2) - value;
+                if(i > 0) {
+                    bottomLayer[i-1].fuzzyFactor = (-1 + eps) 
+                        + granuleSigma / (granuleDelta / 2);
+                }
+                bottomLayer[i].fuzzyFactor = (1 - eps) 
+                    - (granuleSigma / (granuleDelta / 2));
+            } 
+            else if(value > bottomLayer[i].lowerBound + granuleDelta / 2
+                && value <= bottomLayer[i].upperBound) 
+            {
+                double granuleSigma = value - (bottomLayer[i].lowerBound 
+                    + granuleDelta / 2);
+                bottomLayer[i].fuzzyFactor = (1 - granuleSigma / (granuleDelta
+                    / 2)) - eps;
+                if(i < bottomLayer.size() - 1) {
+                    bottomLayer[i+1].fuzzyFactor = (-1 + eps) + granuleSigma
+                        / (granuleDelta / 2);
+                }
+                ++i;
+            } else {
+                bottomLayer[i].fuzzyFactor = -1 + eps;
+            }
+        }
     }
 } // namespace Core
