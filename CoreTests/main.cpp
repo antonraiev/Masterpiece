@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "SensorTests.h"
+#include "SensorMemoryTests.h"
 
 GTEST_API_ int main(int argc, char **argv)
 {
