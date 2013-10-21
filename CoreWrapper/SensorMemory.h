@@ -8,15 +8,15 @@ namespace CoreWrapper
 	{
 	public:
 
-		SensorMemory(double lowerBound, double upperBound, double granuleSize)
-		{
+        SensorMemory(double lowerBound, double upperBound, double granuleSize)
+        {
             sensorMemory = new Core::SensorMemory(lowerBound, upperBound, granuleSize);
-		}
+        }
 
-		~SensorMemory()
-		{
-			delete sensorMemory;
-		}
+        ~SensorMemory()
+        {
+            delete sensorMemory;
+        }
 
         void AddLayer(size_t granuleCount)
         {

@@ -3,8 +3,8 @@
 namespace CoreWrapper
 {
     public ref class Granule
-	{
-	public:
+    {
+    public:
 
         Granule(double lowerBound, double upperBound, double fuzzyFactor)
         {
