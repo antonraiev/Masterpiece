@@ -8,12 +8,12 @@ namespace Core
     {
     }
 
-    const Sensor& ControlModel::getSensor() const
+    Sensor& ControlModel::getSensor()
     {
         return sensor;
     }
 
-    const SensorMemory& ControlModel::getSensorMemory() const
+    SensorMemory& ControlModel::getSensorMemory()
     {
         return sensorMemory;
     }
