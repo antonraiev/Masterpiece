@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ControlModelTests.h" />
     <ClInclude Include="gtest\gtest.h" />
     <ClInclude Include="SensorMemoryTests.h" />
     <ClInclude Include="SensorTests.h" />
