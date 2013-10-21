@@ -2,7 +2,7 @@
 
 namespace CoreWrapper
 {
-    enum SensorType {TEMPERATURE_SENSOR, HUMIDITY_SENSOR, DISTANCE_SENSOR};
+    public enum class SensorType {TEMPERATURE_SENSOR, HUMIDITY_SENSOR, DISTANCE_SENSOR};
 
     public ref class Sensor
     {
@@ -49,7 +49,7 @@ namespace CoreWrapper
         {
             SensorType get()
             {
-                SensorType type = static_cast<SensorType>(sensor->getValue());
+                SensorType type = static_cast<SensorType>(sensor->getType());
                 return type;
             }
         }
@@ -65,6 +65,20 @@ namespace CoreWrapper
         void Update()
         {
             sensor->update();
+        }
+
+    internal:
+        Sensor(Core::Sensor &nativeSensor)
+        {
+            sensor = &nativeSensor;
+        }
+
+        property const Core::Sensor& Native
+        {
+            const Core::Sensor& get()
+            {
+                return *sensor;
+            }
         }
 
     private:
