@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Granule.h" />
+    <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
