@@ -24,9 +24,21 @@
     <ClInclude Include="Sensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ControlModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
