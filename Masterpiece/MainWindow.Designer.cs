@@ -36,14 +36,14 @@
             this.valueBox.Location = new System.Drawing.Point(12, 12);
             this.valueBox.Multiline = true;
             this.valueBox.Name = "valueBox";
-            this.valueBox.Size = new System.Drawing.Size(260, 237);
+            this.valueBox.Size = new System.Drawing.Size(608, 58);
             this.valueBox.TabIndex = 0;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(865, 608);
             this.Controls.Add(this.valueBox);
             this.Name = "MainWindow";
             this.Text = "Main Window";
