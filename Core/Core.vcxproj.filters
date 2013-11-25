@@ -24,7 +24,7 @@
     <ClCompile Include="src\Sensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FuzzyOperations.cpp">
+    <ClCompile Include="src\FuzzyOperations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="include\Sensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FuzzyOperations.h">
+    <ClInclude Include="include\FuzzyOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

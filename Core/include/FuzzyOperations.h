@@ -5,6 +5,7 @@ namespace Core
 {
     namespace Fuzzy
     {
+        static const double MAX_BETA = 25;
         /*
          * Truth accumulation of alpha parameter (fuzzy truth factor of granule)
          * @param alpha1 First alpha parameter
@@ -42,6 +43,16 @@ namespace Core
          * @returns Resolution of the granule
          */
         double gamma(double beta);
+
+        /*
+         * Operation G (compute the truth value of two granules)
+         * @param alpha1 Alpha of the first granule
+         * @param alpha2 Alpha of the second granule
+         * @param beta1 Beta of the first granule
+         * @param beta2 Beta of the second granule
+         * @returns Overall alpha
+         */
+        double operationG(double alpha1, double alpha2, double beta1, double beta2);
     }
 }
 
