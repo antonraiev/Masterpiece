@@ -380,7 +380,7 @@
 				supplier   	@3
 				vertices   	(list Points
 				    (743, 761)
-				    (984, 775))
+				    (986, 775))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$5" @9
 				Parent_View 	@7
@@ -419,7 +419,7 @@
 				supplier   	@4
 				vertices   	(list Points
 				    (665, 600)
-				    (828, 495))
+				    (814, 502))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$11" @12
 				Parent_View 	@10
@@ -431,7 +431,7 @@
 				supplier   	@6
 				vertices   	(list Points
 				    (665, 600)
-				    (502, 706))
+				    (502, 705))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$12" @13
 			location   	(746, 972)
@@ -458,7 +458,7 @@
 				supplier   	@5
 				vertices   	(list Points
 				    (746, 972)
-				    (990, 1156))
+				    (992, 1157))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$14" @15
 				Parent_View 	@13
@@ -509,7 +509,7 @@
 			supplier   	@1
 			vertices   	(list Points
 			    (1204, 742)
-			    (1831, 516))
+			    (1784, 533))
 			line_style 	0)
 		    (object DependencyView "" @18
 			font       	(object Font
@@ -547,7 +547,7 @@
 			client     	@3
 			supplier   	@2
 			vertices   	(list Points
-			    (1413, 869)
+			    (1416, 870)
 			    (2079, 1054))
 			line_style 	0)
 		    (object UseCaseView "Use Case View::Watch fuzzy memory state" @20
@@ -634,7 +634,7 @@
 			client     	@5
 			supplier   	@21
 			vertices   	(list Points
-			    (814, 1317)
+			    (747, 1344)
 			    (517, 1438))
 			line_style 	0)
 		    (object DependencyView "" @24
@@ -673,7 +673,7 @@
 			client     	@5
 			supplier   	@20
 			vertices   	(list Points
-			    (1321, 1302)
+			    (1388, 1327)
 			    (1720, 1445))
 			line_style 	0)))))
     root_category 	(object Class_Category "Logical View"
@@ -1572,6 +1572,19 @@
 				quidu      	"528F391A0034"))
 			language   	"ANSI C++")
 		    (object Class "EffectorMemory"
+			attributes 	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"ImplementationType"
+				value      	(value Text ""))
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"HeaderSourceFile"
+				value      	(value Text "include\\EffectorMemory.h"))
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"BodySourceFile"
+				value      	(value Text "src\\EffectorMemory.cpp")))
 			quid       	"52658EAB0352"
 			documentation 	
 |
@@ -1632,6 +1645,8 @@
 				quid       	"5290C3EC0021"
 				type       	"IFuzzyController*"
 				quidu      	"528F391A0034"))
+			module     	"Component View::C++"
+			quidu      	"526100E903D4"
 			language   	"ANSI C++")
 		    (object Class "Robot"
 			quid       	"5281131A01E8"
@@ -1728,6 +1743,15 @@
 				type       	"IObserver<Robot>*"))
 			language   	"ANSI C++")
 		    (object Class "IFuzzyController"
+			attributes 	(list Attribute_Set
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"HeaderSourceFile"
+				value      	(value Text "include\\IFuzzyController.h"))
+			    (object Attribute
+				tool       	"Cplusplus"
+				name       	"BodySourceFile"
+				value      	(value Text "")))
 			quid       	"528F391A0034"
 			documentation 	
 |
@@ -1780,6 +1804,8 @@
 				concurrency 	"Sequential"
 				opExportControl 	"Public"
 				uid        	0))
+			module     	"Component View::C++"
+			quidu      	"526100E903D4"
 			language   	"ANSI C++"
 			abstract   	TRUE)
 		    (object Class "IObserver"
@@ -2951,7 +2977,7 @@
 		max_height 	28350
 		max_width  	21600
 		origin_x   	281
-		origin_y   	1826
+		origin_y   	56
 		items      	(list diagram_item_list
 		    (object TierView "User Services" @27
 			font       	(object Font
@@ -3180,7 +3206,7 @@
 			    icon_style 	"Icon"
 			    anchor     	2
 			    nlines     	3
-			    max_width  	544
+			    max_width  	540
 			    justify    	0)
 			width      	154
 			height     	154
@@ -8154,7 +8180,7 @@
 			    location   	(418, 387)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	449
+			    max_width  	453
 			    justify    	0
 			    label      	"RouteView")
 			icon       	"View"
@@ -8393,7 +8419,7 @@
 			    location   	(2904, 2892)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	445
+			    max_width  	449
 			    justify    	0
 			    label      	"sensorMemoryView")
 			icon       	"View"
@@ -8424,7 +8450,7 @@
 			    location   	(3707, 2711)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	449
+			    max_width  	453
 			    justify    	0
 			    label      	"prototypeMemoryView")
 			icon       	"View"
@@ -8455,7 +8481,7 @@
 			    location   	(3480, 303)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	453
+			    max_width  	456
 			    justify    	0
 			    label      	"effectorMemoryView")
 			icon       	"View"
@@ -10270,18 +10296,19 @@
 			value      	(value Text 
 |v1:KSensor.cpp,5262d2b2,A
 |ISensor.h,5262d2b2,A
-|Winclude\ControlModel.h,5262d72d,A
-|Rinclude\Granule.h,5262d76e,A
-|Qinclude\Sensor.h,5262d65a,A
-|Rinclude\Sensor1.h,5262d621,A
-|Winclude\SensorMemory.h,5262d65a,A
-|Xinclude\SensorMemory1.h,5262d622,A
-|Usrc\ControlModel.cpp,5262d2b2,A
+|Winclude\ControlModel.h,526507dd,A
+|ainclude\EffectorMemory.cpp,5293bd77,A
+|Yinclude\EffectorMemory.h,5293bdf3,A
+|Rinclude\Granule.h,5263a045,A
+|cinclude\IFuzzyController.cpp,5293bebc,A
+|ainclude\IFuzzyController.h,5293bebc,A
+|Qinclude\Sensor.h,5263a045,A
+|Winclude\SensorMemory.h,5263a045,A
+|Usrc\ControlModel.cpp,526507dd,A
+|Wsrc\EffectorMemory.cpp,5293bdf3,A
 |Psrc\Granule.cpp,5262d2b2,A
-|Osrc\Sensor.cpp,5262d65a,A
-|Psrc\Sensor1.cpp,5262d622,A
-|Usrc\SensorMemory.cpp,5262d65a,A
-|Vsrc\SensorMemory1.cpp,5262d622,A
+|Osrc\Sensor.cpp,5263a045,A
+|Usrc\SensorMemory.cpp,52641be1,A
 |
 			))
 		    (object Attribute
@@ -10321,35 +10348,43 @@
 			value      	"src")
 		    (object Attribute
 			tool       	"Cplusplus"
-			name       	"CodeItemsEncoding"
-			value      	(value Text 
-|v3:Core::ControlModel,t,D,,A,74,3e5
-|Core::ControlModel::ControlModel,f,J,,HSensor,,23,56
-|Core::ControlModel::getSensor,f,J,,Fconst,58,88
-|Core::ControlModel::getSensorMemory,f,J,,Fconst,8a,c6
-|Core::ControlModel::update,f,J,,A,c8,ed
-|Core::Granule,t,E,,A,3b,104
-|Core::Sensor,t,F,,A,7b,659
-|Core::Sensor::Sensor,f,L,,gSensorType,double,double,double,,1d,85
-|Core::Sensor::getLowerBound,f,L,,Fconst,87,b5
-|Core::Sensor::getMeasurementError,f,L,,Fconst,140,174
-|Core::Sensor::getType,f,L,,Fconst,112,13e
-|Core::Sensor::getUpperBound,f,L,,Fconst,e2,110
-|Core::Sensor::getValue,f,L,,Fconst,b7,e0
-|Core::Sensor::update,f,L,,A,176,195
-|Core::SensorMemory,t,H,,A,a4,783
-|Core::SensorMemory::SensorMemory,f,N,,Vdouble,double,double,,23,81
-|Core::SensorMemory::addLayer,f,N,,Hsize_t,,83,bd
-|Core::SensorMemory::getGranules,f,N,,Msize_t,const,124,175
-|Core::SensorMemory::getLayerCount,f,N,,Fconst,ee,122
-|Core::SensorMemory::removeTopLayer,f,N,,A,bf,ec
-|Core::SensorMemory::update,f,N,,Hdouble,,177,1a8
-|
-			))
+			name       	"AccessIndentation"
+			value      	0)
 		    (object Attribute
 			tool       	"Cplusplus"
-			name       	"AccessIndentation"
-			value      	0))
+			name       	"CodeItemsEncoding"
+			value      	
+|v3:Core::ControlModel,t,D,,A,74,431
+|Core::ControlModel::ControlModel,f,L,,OSensor,double,,31,e6
+|Core::ControlModel::getSensor,f,L,,A,ec,130
+|Core::ControlModel::getSensorMemory,f,L,,A,136,18c
+|Core::ControlModel::update,f,L,,A,192,202
+|Core::EffectorMemory,t,F,,A,a8,364
+|Core::EffectorMemory::EffectorMemory,f,M,,SIFuzzyController*,,25,70
+|Core::EffectorMemory::getControl,f,M,,RControlType,const,72,b7
+|Core::EffectorMemory::update,f,M,,A,b9,e0
+|Core::Granule,t,G,,A,3b,1c7
+|Core::IFuzzyController,t,I,,A,ac,38d
+|Core::IFuzzyController::getRuleActivity,f,H,,RControlType,const,90,ee
+|Core::IFuzzyController::getSensorGranule,f,H,,eSensorType,size_t,size_t,const,27,8e
+|Core::Sensor,t,J,,A,86,687
+|Core::Sensor::Sensor,f,O,,gSensorType,double,double,double,,50,187
+|Core::Sensor::getLowerBound,f,O,,Fconst,18d,1d8
+|Core::Sensor::getMeasurementError,f,O,,Fconst,2bf,316
+|Core::Sensor::getType,f,O,,Fconst,276,2b9
+|Core::Sensor::getUpperBound,f,O,,Fconst,225,270
+|Core::Sensor::getValue,f,O,,Fconst,1de,21f
+|Core::Sensor::update,f,O,,A,31c,3e3
+|Core::SensorMemory,t,K,,A,6e,761
+|Core::SensorMemory::SensorMemory,f,P,,Vdouble,double,double,,6d,2bb
+|Core::SensorMemory::addLayer,f,P,,Hsize_t,,2c1,6c3
+|Core::SensorMemory::getGranules,f,P,,Msize_t,const,7f2,8f2
+|Core::SensorMemory::getLayerCount,f,P,,Fconst,798,7ec
+|Core::SensorMemory::removeTopLayer,f,P,,A,6c9,792
+|Core::SensorMemory::update,f,P,,Hdouble,,8f8,f26
+|Core::SensorType,t,J,,A,39,80
+|
+			))
 		quid       	"526100E903D4"
 		stereotype 	""
 		language   	"ANSI C++"
@@ -10360,7 +10395,11 @@
 		class      	"Logical View::Business Services::FuzzyController"
 		quidu      	"52615D4E026C"
 		class      	"Logical View::Data Services::Granule"
-		quidu      	"52628E4C025E"))
+		quidu      	"52628E4C025E"
+		class      	"Logical View::Business Services::EffectorMemory"
+		quidu      	"52658EAB0352"
+		class      	"Logical View::Business Services::IFuzzyController"
+		quidu      	"528F391A0034"))
 	physical_presentations 	(list unit_reference_list
 	    (object Module_Diagram "Main"
 		quid       	"52416654013E"
