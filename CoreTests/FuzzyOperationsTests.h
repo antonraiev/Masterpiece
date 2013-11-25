@@ -40,4 +40,13 @@ namespace CoreTests
         ASSERT_NEAR(0, result, eps);
     }
 
+    TEST(FuzzyOperationsTests, testGamma)
+    {
+        const double eps = 0.0001;
+        ASSERT_NEAR(1, Core::Fuzzy::gamma(0.05), eps);
+        ASSERT_NEAR(0.95, Core::Fuzzy::gamma(0.06), eps);
+        ASSERT_NEAR(0, Core::Fuzzy::gamma(23), eps);
+        ASSERT_NEAR(0.9, Core::Fuzzy::gamma(0.15), eps);
+        ASSERT_NEAR(0.1, Core::Fuzzy::gamma(2.05), eps);
+    }
 }
