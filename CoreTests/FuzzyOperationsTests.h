@@ -40,21 +40,4 @@ namespace CoreTests
         ASSERT_NEAR(0, result, eps);
     }
 
-    TEST(FuzzyOperationsTests, testBetaAccumulation)
-    {
-        double beta1, beta2;
-        const double eps = 0.001;
-
-        beta1 = beta2 = 0.05;
-        double result = Core::Fuzzy::betaAccumulation(beta1, beta2);
-        ASSERT_NEAR(0.05, result, eps);
-
-        beta1 = beta2 = 25;
-        result = Core::Fuzzy::betaAccumulation(beta1, beta2);
-        ASSERT_NEAR(25, result, eps);
-
-        beta1 = beta2 = 25;
-        result = Core::Fuzzy::betaAccumulation(beta1, beta2);
-        ASSERT_NEAR(25, result, eps);
-    }
 }

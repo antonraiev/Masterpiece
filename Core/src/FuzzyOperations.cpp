@@ -39,18 +39,6 @@ namespace Core
             return alphaAccumulation(alpha1, alpha2, 1, 1);
         }
 
-        double betaAccumulation(double beta1, double beta2)
-        {
-            double denominator = (gamma(beta1) + gamma(beta2));
-            if(denominator == 0) {
-                return MAX_BETA;
-            }
-
-            return beta1 * (1 - (beta2 - beta1 >= 0 ? 1 : -1) 
-                * (std::abs(gamma(beta1) - gamma(beta2)) 
-                / denominator));
-        }
-
         double gamma(double beta)
         {
             const size_t tableSize = 16;

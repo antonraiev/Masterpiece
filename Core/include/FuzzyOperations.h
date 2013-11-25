@@ -29,15 +29,6 @@ namespace Core
         double alphaAccumulation(double alpha1, double alpha2);
 
         /*
-         * Truth accumulation of beta parameter (actuality 
-         * of granule information)
-         * @param beta1 First beta parameter
-         * @param beta2 Second beta parameter
-         * @returns Accumulated beta
-         */
-        double betaAccumulation(double beta1, double beta2);
-
-        /*
          * Resolution of the granule
          * @param beta Beta value of granule
          * @returns Resolution of the granule
