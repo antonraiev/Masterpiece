@@ -8,11 +8,10 @@
 
 namespace Core 
 {
-    enum ControlType {MOVE_FORWARD, MOVE_BACKWARD};
-
     /** 
     * Mediator interface. Needed to carry out callbacks from colleagues to mediator 
     */
+    template <typename TControlType>
     class IFuzzyController
     {
     public:
@@ -32,7 +31,7 @@ namespace Core
         * @returns Map with granule pairs activity-control
         */
         virtual std::map<Granule, Granule> 
-            getRuleActivity(ControlType type) const = 0;
+            getRuleActivity(TControlType type) const = 0;
     };
 } // namespace Core
 
