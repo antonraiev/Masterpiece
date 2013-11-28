@@ -73,6 +73,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\EffectorMemoryImpl.h" />
     <ClInclude Include="include\EffectorMemory.h" />
     <ClInclude Include="include\FuzzyOperations.h" />
     <ClInclude Include="include\ControlModel.h" />
