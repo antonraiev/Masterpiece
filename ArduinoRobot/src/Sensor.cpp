@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-namespace Core 
+namespace Arduino 
 {
     Sensor::Sensor(SensorType type, double lowerBound, double upperBound, double measurementError) :
         type(type),

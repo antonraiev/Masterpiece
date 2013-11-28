@@ -1,7 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-namespace Core 
+namespace Arduino
 {
     enum SensorType {TEMPERATURE_SENSOR, HUMIDITY_SENSOR, DISTANCE_SENSOR};
 

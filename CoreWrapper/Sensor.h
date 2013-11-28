@@ -11,8 +11,8 @@ namespace CoreWrapper
         Sensor(SensorType type, double lowerBound, double upperBound,
             double measurementError)
         {
-            Core::SensorType nativeType = static_cast<Core::SensorType>(type);
-            sensor = new Core::Sensor(nativeType, lowerBound, upperBound,
+            Arduino::SensorType nativeType = static_cast<Arduino::SensorType>(type);
+            sensor = new Arduino::Sensor(nativeType, lowerBound, upperBound,
                 measurementError);
         }
 
@@ -68,20 +68,20 @@ namespace CoreWrapper
         }
 
     internal:
-        Sensor(Core::Sensor &nativeSensor)
+        Sensor(Arduino::Sensor &nativeSensor)
         {
             sensor = &nativeSensor;
         }
 
-        property const Core::Sensor& Native
+        property const Arduino::Sensor& Native
         {
-            const Core::Sensor& get()
+            const Arduino::Sensor& get()
             {
                 return *sensor;
             }
         }
 
     private:
-        Core::Sensor *sensor;
+        Arduino::Sensor *sensor;
     };
 } // namespace CoreWrapper
