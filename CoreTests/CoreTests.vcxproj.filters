@@ -18,13 +18,7 @@
     <ClInclude Include="gtest\gtest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SensorMemoryTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ControlModelTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FuzzyOperationsTests.h">

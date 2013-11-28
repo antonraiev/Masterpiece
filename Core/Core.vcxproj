@@ -76,17 +76,13 @@
     <ClInclude Include="include\EffectorMemoryImpl.h" />
     <ClInclude Include="include\EffectorMemory.h" />
     <ClInclude Include="include\FuzzyOperations.h" />
-    <ClInclude Include="include\ControlModel.h" />
     <ClInclude Include="include\Granule.h" />
     <ClInclude Include="include\IControlMediator.h" />
-    <ClInclude Include="include\Sensor.h" />
     <ClInclude Include="include\SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EffectorMemory.cpp" />
     <ClCompile Include="src\FuzzyOperations.cpp" />
-    <ClCompile Include="src\ControlModel.cpp" />
-    <ClCompile Include="src\Sensor.cpp" />
     <ClCompile Include="src\SensorMemory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

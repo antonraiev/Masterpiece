@@ -1,8 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "SensorTests.h"
 #include "SensorMemoryTests.h"
-#include "ControlModelTests.h"
 #include "FuzzyOperationsTests.h"
 
 GTEST_API_ int main(int argc, char **argv)

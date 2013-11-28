@@ -19,7 +19,7 @@ namespace Mastepiece
             InitializeComponent();
             graphic = this.CreateGraphics();
             Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 50, 2);
-            controlModel = new ControlModel(sensor, 5);
+//            controlModel = new ControlModel(sensor, 5);
             for (int i = 0; i < 16; i++) granuleLabel[i] = new Label();
             Timer timer = new Timer();
             timer.Interval = 2000;
@@ -86,9 +86,9 @@ namespace Mastepiece
         void OnTimer(Object sender, EventArgs e)
         {
             valueBox.Clear();
-            controlModel.Update();
+//            controlModel.Update();
             valueBox.Text += "Layer 1: ";
-            List<Granule> layer1 = controlModel.SensorMemory.GetGranules(0);
+            List<Granule> layer1 = new List<Granule>();// = controlModel.SensorMemory.GetGranules(0);
 
 
             foreach (Granule granule in layer1)
@@ -97,12 +97,12 @@ namespace Mastepiece
             }
 
             valueBox.Text += "\r\n\r\nLayer 2: ";
-            if (controlModel.SensorMemory.LayerCount >= 2)
-            {
-                controlModel.SensorMemory.RemoveTopLayer();
-            }
-            controlModel.SensorMemory.AddLayer(2);
-            List<Granule> layer2 = controlModel.SensorMemory.GetGranules(1);
+            //if (controlModel.SensorMemory.LayerCount >= 2)
+            //{
+            //    controlModel.SensorMemory.RemoveTopLayer();
+            //}
+            //controlModel.SensorMemory.AddLayer(2);
+            List<Granule> layer2 = new List<Granule>();// = controlModel.SensorMemory.GetGranules(1);
             foreach (Granule granule in layer2)
             {
                 valueBox.Text += granule.Alpha + " ";
@@ -111,16 +111,6 @@ namespace Mastepiece
             DrawLayer(layer1, 1);
         }
 
-        private ControlModel controlModel;
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainWindow_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+//        private ControlModel controlModel;
     }
 }

@@ -44,15 +44,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Core\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)ArduinoRobot\include;$(IncludePath)</IncludePath>
     <IntDir>build\$(Configuration)\</IntDir>
-    <LibraryPath>$(SolutionDir)Core\bin\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Core\bin\$(Configuration);$(SolutionDir)ArduinoRobot\bin\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Core\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Core\bin\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)ArduinoRobot\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Core\bin\$(Configuration);$(SolutionDir)ArduinoRobot\bin\$(Configuration);$(LibraryPath)</LibraryPath>
     <IntDir>build\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -64,7 +64,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Core.lib</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,7 +75,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Core.lib</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -84,14 +84,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ControlModel.h" />
     <ClInclude Include="Granule.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="ControlModel.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="SensorMemory.cpp" />
   </ItemGroup>
