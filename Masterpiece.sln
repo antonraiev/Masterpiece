@@ -18,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreTests", "CoreTests\Core
 		{6DCE723A-D2AB-463E-8B80-9B15A1AE85C2} = {6DCE723A-D2AB-463E-8B80-9B15A1AE85C2}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArduinoRobot", "ArduinoRobot\ArduinoRobot.vcxproj", "{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,16 @@ Global
 		{7F84134E-789D-4AD4-A8C6-31C586DF8CDA}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{7F84134E-789D-4AD4-A8C6-31C586DF8CDA}.Release|Win32.ActiveCfg = Release|Win32
 		{7F84134E-789D-4AD4-A8C6-31C586DF8CDA}.Release|Win32.Build.0 = Release|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Debug|Win32.Build.0 = Debug|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Release|Win32.ActiveCfg = Release|Win32
+		{DDA2D250-E7AE-4D4F-A292-8EE9CBC70488}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

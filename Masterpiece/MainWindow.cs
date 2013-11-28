@@ -24,7 +24,12 @@ namespace Mastepiece
                 sensorMemory.AddLayer();
             }
             graphic = this.CreateGraphics();
+<<<<<<< HEAD
 
+=======
+            Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 50, 2);
+//            controlModel = new ControlModel(sensor, 5);
+>>>>>>> Remove ControlModel class
             for (int i = 0; i < 16; i++) granuleLabel[i] = new Label();
             Timer timer = new Timer();
             timer.Interval = 2000;
@@ -91,8 +96,15 @@ namespace Mastepiece
         void OnTimer(Object sender, EventArgs e)
         {
             valueBox.Clear();
+<<<<<<< HEAD
             sensor.Update();
             sensorMemory.Update(sensor.Value);
+=======
+//            controlModel.Update();
+            valueBox.Text += "Layer 1: ";
+            List<Granule> layer1 = new List<Granule>();// = controlModel.SensorMemory.GetGranules(0);
+
+>>>>>>> Remove ControlModel class
 
             for (uint i = 0; i < sensorMemory.LayerCount; ++i)
             {
@@ -111,11 +123,30 @@ namespace Mastepiece
                 DrawLayer(layer, (int)i);
             }
 
+<<<<<<< HEAD
             //DrawLayer(layer2, 2);
             //DrawLayer(layer1, 1);
         }
 
         private Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 24, 2);
         private SensorMemory sensorMemory = new SensorMemory(0, 24, 2, 3);
+=======
+            valueBox.Text += "\r\n\r\nLayer 2: ";
+            //if (controlModel.SensorMemory.LayerCount >= 2)
+            //{
+            //    controlModel.SensorMemory.RemoveTopLayer();
+            //}
+            //controlModel.SensorMemory.AddLayer(2);
+            List<Granule> layer2 = new List<Granule>();// = controlModel.SensorMemory.GetGranules(1);
+            foreach (Granule granule in layer2)
+            {
+                valueBox.Text += granule.Alpha + " ";
+            }
+            DrawLayer(layer2, 2);
+            DrawLayer(layer1, 1);
+        }
+
+//        private ControlModel controlModel;
+>>>>>>> Remove ControlModel class
     }
 }

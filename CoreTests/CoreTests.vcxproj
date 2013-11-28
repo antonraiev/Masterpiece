@@ -15,7 +15,6 @@
     <ClInclude Include="FuzzyOperationsTests.h" />
     <ClInclude Include="gtest\gtest.h" />
     <ClInclude Include="SensorMemoryTests.h" />
-    <ClInclude Include="SensorTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gtest-all.cc" />

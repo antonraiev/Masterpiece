@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 
-#include "SensorTests.h"
 #include "SensorMemoryTests.h"
 #include "FuzzyOperationsTests.h"
 #include "ActuatorCooperationTests.h"
