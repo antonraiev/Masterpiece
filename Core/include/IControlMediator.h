@@ -2,7 +2,6 @@
 #define IFUZZYCONTROLLER_H
 
 #include "Granule.h"
-#include "Sensor.h"
 
 #include <vector>
 #include <map>

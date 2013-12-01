@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="include\Robot.h" />
     <ClInclude Include="include\Sensor.h" />
+    <ClInclude Include="include\SensorType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Robot.cpp" />

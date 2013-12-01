@@ -12,8 +12,7 @@ namespace CoreWrapper
             double measurementError)
         {
             Arduino::SensorType nativeType = static_cast<Arduino::SensorType>(type);
-            sensor = new Arduino::Sensor(nativeType, lowerBound, upperBound,
-                measurementError);
+            sensor = new Arduino::Sensor(nativeType);
         }
 
         ~Sensor()
