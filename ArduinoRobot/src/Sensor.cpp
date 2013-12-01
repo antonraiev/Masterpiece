@@ -5,11 +5,8 @@
 
 namespace Arduino 
 {
-    Sensor::Sensor(SensorType type, double lowerBound, double upperBound, double measurementError) :
-        type(type),
-        lowerBound(lowerBound),
-        upperBound(upperBound),
-        measurementError(measurementError)
+    Sensor::Sensor(SensorType type) :
+        type(type)
     {
         this->update();
         // initial value (stub)
