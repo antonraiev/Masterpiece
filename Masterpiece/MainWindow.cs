@@ -71,7 +71,7 @@ namespace Mastepiece
 
                 granuleLabel[index].Text = "";
                 granuleLabel[index].Location = new System.Drawing.Point(startX + 50, start_lab);
-                granuleLabel[index].Text = granule.FuzzyFactor.ToString();
+                granuleLabel[index].Text = granule.Alpha.ToString();
                 granuleLabel[index].BackColor = System.Drawing.Color.Transparent;
                 if (granuleLabel[index].Text.Length > 3)
                     granuleLabel[index].Text.Substring(0, 3);
@@ -93,7 +93,7 @@ namespace Mastepiece
 
             foreach (Granule granule in layer1)
             {
-                valueBox.Text += granule.FuzzyFactor + " ";
+                valueBox.Text += granule.Alpha + " ";
             }
 
             valueBox.Text += "\r\n\r\nLayer 2: ";
@@ -105,7 +105,7 @@ namespace Mastepiece
             List<Granule> layer2 = controlModel.SensorMemory.GetGranules(1);
             foreach (Granule granule in layer2)
             {
-                valueBox.Text += granule.FuzzyFactor + " ";
+                valueBox.Text += granule.Alpha + " ";
             }
             DrawLayer(layer2, 2);
             DrawLayer(layer1, 1);

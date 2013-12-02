@@ -6,9 +6,19 @@ namespace CoreWrapper
     {
     public:
 
-        Granule(double lowerBound, double upperBound, double fuzzyFactor)
+        Granule(double lowerBound, double upperBound, double alpha, double beta)
         {
-            granule = new Core::Granule(lowerBound, upperBound, fuzzyFactor);
+            granule = new Core::Granule(lowerBound, upperBound, alpha, beta);
+        }
+
+        Granule(double alpha, double beta)
+        {
+            granule = new Core::Granule(alpha, beta);
+        }
+
+        Granule()
+        {
+            granule = new Core::Granule();
         }
 
         ~Granule()
@@ -40,15 +50,27 @@ namespace CoreWrapper
             }
         }
 
-        property double FuzzyFactor
+        property double Alpha
         {
             double get()
             {
-                return granule->fuzzyFactor;
+                return granule->alpha;
             }
             void set(double fuzzyFactor)
             {
-                granule->fuzzyFactor = fuzzyFactor;
+                granule->alpha = fuzzyFactor;
+            }
+        }
+
+        property double Beta
+        {
+            double get()
+            {
+                return granule->beta;
+            }
+            void set(double beta)
+            {
+                granule->beta = beta;
             }
         }
 

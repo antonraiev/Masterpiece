@@ -44,7 +44,8 @@ namespace CoreWrapper
             GranuleList ^managedGranules = gcnew GranuleList();
             for(size_t i = 0; i < granules.size(); ++i) {
                 managedGranules->Add(gcnew Granule(granules[i].lowerBound,
-                    granules[i].upperBound, granules[i].fuzzyFactor));
+                    granules[i].upperBound, granules[i].alpha,
+                    granules[i].beta));
             }
             return managedGranules;
         }
