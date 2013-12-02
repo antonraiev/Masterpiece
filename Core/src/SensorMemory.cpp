@@ -4,6 +4,8 @@
 #include <cmath>
 #include <algorithm>
 
+#include "FuzzyOperations.h"
+
 namespace Core 
 {
     SensorMemory::SensorMemory(double lowerBound, double upperBound, double granuleSize) :
@@ -17,7 +19,7 @@ namespace Core
         for(double d = lowerBound; d < upperBound; ) {
             double granuleLowerBound = d;
             d = std::min(upperBound, d + granuleSize);
-            Granule granule(granuleLowerBound, d, -1);
+            Granule granule(granuleLowerBound, d, -1, Fuzzy::MAX_BETA);
             granules.push_back(granule);
         }
         layers.push_back(granules);
@@ -38,13 +40,14 @@ namespace Core
                 prevLayer.begin() + nextIndex,
                 [] (const Granule &first, const Granule &second) -> bool
             {
-                return first.fuzzyFactor < second.fuzzyFactor;
-            })->fuzzyFactor;
+                return first.alpha < second.alpha;
+            })->alpha;
 
             double granuleLowerBound = prevLayer[i].lowerBound;
             i = nextIndex;
             double granuleUpperBound = prevLayer[i].upperBound;
-            Granule granule(granuleLowerBound, granuleUpperBound, maxFuzzyFactor);
+            Granule granule(granuleLowerBound, granuleUpperBound,
+                maxFuzzyFactor, 0);
             granules.push_back(granule);
         }
         layers.push_back(granules);
@@ -87,10 +90,10 @@ namespace Core
                 double granuleSigma = bottomLayer[i].lowerBound 
                     + (granuleDelta / 2) - value;
                 if(i > 0) {
-                    bottomLayer[i-1].fuzzyFactor = (-1 + eps) 
+                    bottomLayer[i-1].alpha = (-1 + eps) 
                         + granuleSigma / (granuleDelta / 2);
                 }
-                bottomLayer[i].fuzzyFactor = (1 - eps) 
+                bottomLayer[i].alpha = (1 - eps) 
                     - (granuleSigma / (granuleDelta / 2));
             } 
             else if(value > bottomLayer[i].lowerBound + granuleDelta / 2
@@ -98,15 +101,15 @@ namespace Core
             {
                 double granuleSigma = value - (bottomLayer[i].lowerBound 
                     + granuleDelta / 2);
-                bottomLayer[i].fuzzyFactor = (1 - granuleSigma / (granuleDelta
+                bottomLayer[i].alpha = (1 - granuleSigma / (granuleDelta
                     / 2)) - eps;
                 if(i < bottomLayer.size() - 1) {
-                    bottomLayer[i+1].fuzzyFactor = (-1 + eps) + granuleSigma
+                    bottomLayer[i+1].alpha = (-1 + eps) + granuleSigma
                         / (granuleDelta / 2);
                 }
                 ++i;
             } else {
-                bottomLayer[i].fuzzyFactor = -1 + eps;
+                bottomLayer[i].alpha = -1 + eps;
             }
         }
     }
