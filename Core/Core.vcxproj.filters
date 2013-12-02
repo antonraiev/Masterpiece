@@ -53,11 +53,11 @@
     <ClInclude Include="include\EffectorMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IFuzzyController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\EffectorMemoryImpl.h">
       <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IControlMediator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
