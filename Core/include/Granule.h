@@ -10,20 +10,25 @@ namespace Core
     {
         double lowerBound;
         double upperBound;
-        double fuzzyFactor;
+        double alpha;
+        double beta;
 
-        Granule() :
-            lowerBound(0),
-            upperBound(0),
-            fuzzyFactor(0)
+        Granule()
         {
-
         }
 
-        Granule(double lowerBound, double upperBound, double fuzzyFactor) :
+        Granule(double alpha, double beta) :
+            alpha(alpha),
+            beta(beta)
+        {
+        }
+
+        Granule(double lowerBound, double upperBound, double alpha,
+            double beta) :
             lowerBound(lowerBound),
             upperBound(upperBound),
-            fuzzyFactor(fuzzyFactor)
+            alpha(alpha),
+            beta(beta)
         {
         }
     };
