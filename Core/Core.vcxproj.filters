@@ -33,6 +33,9 @@
     <ClCompile Include="src\Granule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Actuator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SensorMemory.h">
@@ -55,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="include\IControlMediator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Actuator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActuatorImpl.h">
+      <Filter>Header Files\Impl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
