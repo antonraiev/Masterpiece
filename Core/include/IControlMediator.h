@@ -4,15 +4,18 @@
 #include "Granule.h"
 #include "Sensor.h"
 
+#include <vector>
 #include <map>
 
 namespace Core 
 {
     /** 
     * Mediator interface. Needed to carry out callbacks from colleagues to mediator 
+    * @tparam TSensorType Type of sensor enum
+    * @tparam TControlType Type of control enum
     */
-    template <typename TControlType>
-    class IFuzzyController
+    template <typename TSensorType, typename TControlType>
+    class IControlMediator
     {
     public:
         /** 
@@ -22,16 +25,18 @@ namespace Core
         * @param index Index of granule in layer
         * @returns Granule from sensor memory
         */
-        virtual Granule getSensorGranule(SensorType type, 
+        virtual Granule getSensorGranule(TSensorType type, 
             size_t layer, size_t index) const = 0;
 
         /** 
         * Get rule activity and control from prototype memory
         * @param type Type of control
-        * @returns Map with granule pairs activity-control
+        * @returns Vector with granule pairs activity-control
         */
-        virtual std::map<Granule, Granule> 
+        virtual std::vector<std::pair<Granule, Granule> >
             getRuleActivity(TControlType type) const = 0;
+
+        virtual ~IControlMediator(){}
     };
 } // namespace Core
 
