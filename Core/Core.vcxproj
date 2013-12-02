@@ -73,8 +73,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actuator.h" />
-    <ClInclude Include="ActuatorImpl.h" />
+    <ClInclude Include="include\Actuator.h" />
+    <ClInclude Include="include\ActuatorImpl.h" />
     <ClInclude Include="include\EffectorMemoryImpl.h" />
     <ClInclude Include="include\EffectorMemory.h" />
     <ClInclude Include="include\FuzzyOperations.h" />
@@ -85,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Granule.cpp" />
-    <ClCompile Include="Actuator.cpp" />
+    <ClCompile Include="src\Actuator.cpp" />
     <ClCompile Include="src\EffectorMemory.cpp" />
     <ClCompile Include="src\FuzzyOperations.cpp" />
     <ClCompile Include="src\Sensor.cpp" />

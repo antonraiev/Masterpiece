@@ -33,7 +33,7 @@
     <ClCompile Include="src\Granule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Actuator.cpp">
+    <ClCompile Include="src\Actuator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,11 +59,11 @@
     <ClInclude Include="include\IControlMediator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Actuator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActuatorImpl.h">
+    <ClInclude Include="include\ActuatorImpl.h">
       <Filter>Header Files\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Actuator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
