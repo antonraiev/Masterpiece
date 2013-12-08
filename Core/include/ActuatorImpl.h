@@ -37,6 +37,16 @@ namespace Core
             return stopDelay;
         }
 
+        size_t getHeatingDelay() const
+        {
+            return heatingDelay;
+        }
+
+        size_t getActiveDelay() const
+        {
+            return activeDelay;
+        }
+
         ActuatorState getState() const
         {
             return state;
