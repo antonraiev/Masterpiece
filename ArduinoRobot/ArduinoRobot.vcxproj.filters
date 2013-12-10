@@ -24,12 +24,21 @@
     <ClInclude Include="include\SensorType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\SshConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SshConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
