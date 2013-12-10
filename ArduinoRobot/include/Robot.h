@@ -2,23 +2,29 @@
 #define ROBOT_H
 
 #include <string>
-#include <fstream>
+#include <memory>
+#include <future>
+
+#include "IConnection.h"
 
 namespace Arduino
 {
     enum class ControlType {MOVE_FORWARD_SLOW = 'S', MOVE_FORWARD_AVERAGE = 'A',
-        MOVE_FORWARD_FAST = 'F', MOVE_BACKWARD_SLOW = 's', 
+        MOVE_FORWARD_FAST = '8', MOVE_BACKWARD_SLOW = 's',
         MOVE_BACKWARD_AVERAGE = 'a', MOVE_BACKWARD_FAST = 'f', MOVE_LEFT = 'l',
-        MOVE_RIGHT = 'r', MOVE_STOP = 'x'};
+        MOVE_RIGHT = 'r', MOVE_STOP = '5'};
 
     class Robot
     {
     public:
-        Robot(const std::string &comPortName);
+        Robot(std::unique_ptr<IConnection> connection);
         void setControl(ControlType control);
+        const std::string& getOutput();
+        void update();
 
     private:
-        std::fstream comPort;
+        std::future<std::string> output;
+        std::unique_ptr<IConnection> connection;
     };
 }
 
