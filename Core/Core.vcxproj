@@ -82,6 +82,7 @@
     <ClInclude Include="include\SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Granule.cpp" />
     <ClCompile Include="src\EffectorMemory.cpp" />
     <ClCompile Include="src\FuzzyOperations.cpp" />
     <ClCompile Include="src\Sensor.cpp" />

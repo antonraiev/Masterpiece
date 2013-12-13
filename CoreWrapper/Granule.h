@@ -30,11 +30,7 @@ namespace CoreWrapper
         {
             double get()
             {
-                return granule->lowerBound;
-            }
-            void set(double lowerBound)
-            {
-                granule->lowerBound = lowerBound;
+                return granule->getLowerBound();
             }
         }
 
@@ -42,11 +38,7 @@ namespace CoreWrapper
         {
             double get()
             {
-                return granule->upperBound;
-            }
-            void set(double upperBound)
-            {
-                granule->upperBound = upperBound;
+                return granule->getUpperBound();
             }
         }
 
@@ -54,11 +46,11 @@ namespace CoreWrapper
         {
             double get()
             {
-                return granule->alpha;
+                return granule->getAlpha();
             }
             void set(double fuzzyFactor)
             {
-                granule->alpha = fuzzyFactor;
+                granule->setAlpha(fuzzyFactor);
             }
         }
 
@@ -66,11 +58,11 @@ namespace CoreWrapper
         {
             double get()
             {
-                return granule->beta;
+                return granule->getBeta();
             }
             void set(double beta)
             {
-                granule->beta = beta;
+                granule->setBeta(beta);
             }
         }
 
