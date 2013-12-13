@@ -13,7 +13,7 @@ namespace Core
     {
         this->update();
         // initial value (stub)
-        value = 25;
+        value = (upperBound - lowerBound) / 2;
     }
 
     double Sensor::getLowerBound() const
@@ -45,7 +45,7 @@ namespace Core
     {
         // stub for now
         srand(time(NULL));
-        int sign = (rand() % 100) > 80 ? -1 : 1;
-        value += sign * (static_cast<double>(rand() % 4) / 10.f);
+        int shift = (rand() % 100) > 60 ? -2 : 2;
+        value += shift;
     }
 } // namespace Core
