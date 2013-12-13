@@ -8,9 +8,9 @@ namespace CoreWrapper
 	{
 	public:
 
-        SensorMemory(double lowerBound, double upperBound, double granuleSize)
+        SensorMemory(double lowerBound, double upperBound, double granuleSize, size_t groupSize)
         {
-            sensorMemory = new Core::SensorMemory(lowerBound, upperBound, granuleSize);
+            sensorMemory = new Core::SensorMemory(lowerBound, upperBound, granuleSize, groupSize);
         }
 
         ~SensorMemory()
@@ -18,9 +18,9 @@ namespace CoreWrapper
             delete sensorMemory;
         }
 
-        void AddLayer(size_t granuleCount)
+        void AddLayer()
         {
-            sensorMemory->addLayer(granuleCount);
+            sensorMemory->addLayer();
         }
 
         void RemoveTopLayer()
@@ -43,9 +43,9 @@ namespace CoreWrapper
             granules = sensorMemory->getGranules(layerIndex);
             GranuleList ^managedGranules = gcnew GranuleList();
             for(size_t i = 0; i < granules.size(); ++i) {
-                managedGranules->Add(gcnew Granule(granules[i].lowerBound,
-                    granules[i].upperBound, granules[i].alpha,
-                    granules[i].beta));
+                managedGranules->Add(gcnew Granule(granules[i].getLowerBound(),
+                    granules[i].getUpperBound(), granules[i].getAlpha(),
+                    granules[i].getBeta()));
             }
             return managedGranules;
         }

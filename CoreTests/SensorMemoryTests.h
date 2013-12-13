@@ -1,4 +1,5 @@
 #include <SensorMemory.h>
+#include <FuzzyOperations.h>
 
 namespace CoreTests
 {
@@ -8,16 +9,17 @@ namespace CoreTests
         static void checkGranulesEqual(const Core::Granule &expected,
             const Core::Granule &produced)
         {
-            ASSERT_EQ(expected.lowerBound, produced.lowerBound);
-            ASSERT_EQ(expected.upperBound, produced.upperBound);
-            ASSERT_EQ(expected.alpha, produced.alpha);
+            ASSERT_EQ(expected.getLowerBound(), produced.getLowerBound());
+            ASSERT_EQ(expected.getUpperBound(), produced.getUpperBound());
+            ASSERT_EQ(expected.getAlpha(), produced.getAlpha());
+            ASSERT_EQ(expected.getBeta(), produced.getBeta());
         }
     };
 
     TEST_F(SensorMemoryTests, testCreation)
     {
         using Core::Granule;
-        Core::SensorMemory sensorMemory(0, 15, 3);
+        Core::SensorMemory sensorMemory(0, 15, 3, 3);
         ASSERT_EQ(1, sensorMemory.getLayerCount());
         std::vector<Granule> granules = sensorMemory.getGranules();
         Granule expectedGranules[] = 
@@ -37,7 +39,7 @@ namespace CoreTests
     TEST_F(SensorMemoryTests, testCreationFractional)
     {
         using Core::Granule;
-        Core::SensorMemory sensorMemory(0, 7.5, 2.5);
+        Core::SensorMemory sensorMemory(0, 7.5, 2.5, 3);
         Granule expectedGranules[] = 
         {
             Granule(0, 2.5, -1, 25),
@@ -54,72 +56,86 @@ namespace CoreTests
     TEST_F(SensorMemoryTests, testAddLayer)
     {
         using Core::Granule;
-        Core::SensorMemory sensorMemory(10, 28, 3);
-        sensorMemory.addLayer(2);
+        Core::SensorMemory sensorMemory(0, 24, 2, 3);
+        sensorMemory.addLayer();
         ASSERT_EQ(sensorMemory.getLayerCount(), 2);
 
         std::vector<Granule> granules = sensorMemory.getGranules(1);
-        ASSERT_EQ(3, granules.size());
+        ASSERT_EQ(8, granules.size());
         Granule expectedGranules[] = 
         {
-            Granule(10, 16, -1, 25),
-            Granule(16, 22, -1, 25),
-            Granule(22, 28, -1, 25),
+            Granule(0, 4, -1, 25),
+            Granule(2, 6, -1, 25),
+            Granule(6, 10, -1, 25),
+            Granule(8, 12, -1, 25),
+            Granule(12, 16, -1, 25),
+            Granule(14, 18, -1, 25),
+            Granule(18, 22, -1, 25),
+            Granule(20, 24, -1, 25),
         };
-
         for(size_t i = 0; i < granules.size(); ++i) {
             this->checkGranulesEqual(expectedGranules[i], granules[i]);
         }
+
+        sensorMemory.addLayer();
+        granules = sensorMemory.getGranules(2);
+        ASSERT_EQ(4, granules.size());
+        sensorMemory.addLayer();
+        granules = sensorMemory.getGranules(3);
+        ASSERT_EQ(3, granules.size());
     }
 
     TEST_F(SensorMemoryTests, testRemoveTopLayer)
     {
-        Core::SensorMemory sensorMemory(5, 15, 1);
+        Core::SensorMemory sensorMemory(5, 15, 1, 2);
         ASSERT_THROW(sensorMemory.removeTopLayer(), std::runtime_error);
 
-        sensorMemory.addLayer(2);
+        sensorMemory.addLayer();
         sensorMemory.removeTopLayer();
         ASSERT_EQ(sensorMemory.getLayerCount(), 1);
         ASSERT_THROW(sensorMemory.removeTopLayer(), std::runtime_error);
     }
 
-    TEST_F(SensorMemoryTests, testAddLayerOdd)
-    {
-        using Core::Granule;
-        Core::SensorMemory sensorMemory(-10, 11, 3);
-        sensorMemory.addLayer(3);
-        Granule expectedGranules[] = 
-        {
-            Granule(-10, -1, -1, 25),
-            Granule(-1, 8, -1, 25),
-            Granule(8, 11, -1, 25),
-        };
-
-        std::vector<Granule> granules = sensorMemory.getGranules(1);
-        for(size_t i = 0; i < granules.size(); ++i) {
-            this->checkGranulesEqual(expectedGranules[i], granules[i]);
-        }
-    }
-
     TEST_F(SensorMemoryTests, testUpdate)
     {
         double eps = 0.001;
-        Core::SensorMemory sensorMemory(0, 30, 10);
-        sensorMemory.update(10);
-        ASSERT_NEAR(-0.05, sensorMemory.getGranules()[0].alpha, eps);
-        ASSERT_NEAR(0.05, sensorMemory.getGranules()[1].alpha, eps);
-        ASSERT_NEAR(-0.95, sensorMemory.getGranules()[2].alpha, eps);
+        Core::SensorMemory sensorMemory(0, 6, 2, 3);
+        sensorMemory.update(5);
+        this->checkGranulesEqual(Core::Granule(0, 2, 0.95, 0.05), sensorMemory.getGranules()[0]);
+        this->checkGranulesEqual(Core::Granule(2, 4, 0.95, 0.05), sensorMemory.getGranules()[1]);
+        this->checkGranulesEqual(Core::Granule(4, 6, 0.95, 0.05), sensorMemory.getGranules()[2]);
 
-        sensorMemory.update(12.5);
-        ASSERT_NEAR(-0.45, sensorMemory.getGranules()[0].alpha, eps);
-        ASSERT_NEAR(0.45, sensorMemory.getGranules()[1].alpha, eps);
+        sensorMemory.update(1);
+        this->checkGranulesEqual(Core::Granule(0, 2, 0.95, 2.05), sensorMemory.getGranules()[0]);
+        this->checkGranulesEqual(Core::Granule(2, 4, -0.95, 0.05), sensorMemory.getGranules()[1]);
+        this->checkGranulesEqual(Core::Granule(4, 6, -0.95, 0.05), sensorMemory.getGranules()[2]);
 
-        sensorMemory.update(15);
-        ASSERT_NEAR(-0.95, sensorMemory.getGranules()[0].alpha, eps);
-        ASSERT_NEAR(0.95, sensorMemory.getGranules()[1].alpha, eps);
+        sensorMemory.update(3);
+        this->checkGranulesEqual(Core::Granule(0, 2, 0.95, 4.05), sensorMemory.getGranules()[0]);
+        this->checkGranulesEqual(Core::Granule(2, 4, 0.95, 0.05), sensorMemory.getGranules()[1]);
+        this->checkGranulesEqual(Core::Granule(4, 6, -0.95, 2.05), sensorMemory.getGranules()[2]);
 
-        sensorMemory.update(20);
-        ASSERT_NEAR(-0.05, sensorMemory.getGranules()[1].alpha, eps);
-        ASSERT_NEAR(0.05, sensorMemory.getGranules()[2].alpha, eps);
+        sensorMemory.update(0);
+        this->checkGranulesEqual(Core::Granule(0, 2, 0.95, 6.05), sensorMemory.getGranules()[0]);
+        this->checkGranulesEqual(Core::Granule(2, 4, -0.95, 0.05), sensorMemory.getGranules()[1]);
+        this->checkGranulesEqual(Core::Granule(4, 6, -0.95, 4.05), sensorMemory.getGranules()[2]);
+    }
+
+    TEST_F(SensorMemoryTests, testUpdateLayers)
+    {
+        double eps = 0.001;
+        Core::SensorMemory sensorMemory(0, 6, 2, 3);
+        for(size_t i = 0; i < 2; ++i) {
+            sensorMemory.addLayer();
+        }
+        sensorMemory.update(5);
+        this->checkGranulesEqual(Core::Granule(0, 4, 0.95, 0.05), sensorMemory.getGranules(1)[0]);
+        this->checkGranulesEqual(Core::Granule(2, 6, 0.95, 0.05), sensorMemory.getGranules(1)[1]);
+        this->checkGranulesEqual(Core::Granule(0, 6, 0.95, 0.05), sensorMemory.getGranules(2)[0]);
+
+        sensorMemory.update(3);
+        this->checkGranulesEqual(Core::Granule(0, 4, 0.95, 2.05), sensorMemory.getGranules(1)[0]);
+        this->checkGranulesEqual(Core::Granule(2, 6, 0, 0.05), sensorMemory.getGranules(1)[1]);
+        this->checkGranulesEqual(Core::Granule(0, 6, 0.475, 0.05), sensorMemory.getGranules(2)[0]);
     }
 } // namespace CoreTests

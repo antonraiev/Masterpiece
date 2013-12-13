@@ -3,53 +3,66 @@
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
+#include <iterator>
+#include <numeric>
 
 #include "FuzzyOperations.h"
 
 namespace Core 
 {
-    SensorMemory::SensorMemory(double lowerBound, double upperBound, double granuleSize) :
-        beta(1.f)
+    const double SensorMemory::eps = 0.05;
+
+    SensorMemory::SensorMemory(double lowerBound, double upperBound, 
+            double granuleSize, size_t groupSize) :
+        granuleSize(granuleSize),
+        groupSize(groupSize)
     {
         if(upperBound <= lowerBound) {
             throw std::invalid_argument("Upper bound should be greater than lower bound");
         }
 
+        prevCoveredCount = 0;
         std::vector<Granule> granules;
         for(double d = lowerBound; d < upperBound; ) {
             double granuleLowerBound = d;
             d = std::min(upperBound, d + granuleSize);
-            Granule granule(granuleLowerBound, d, -1, Fuzzy::MAX_BETA);
+            Granule granule(granuleLowerBound, d, Fuzzy::MIN_ALPHA, Fuzzy::MAX_BETA);
             granules.push_back(granule);
         }
         layers.push_back(granules);
     }
 
-    void SensorMemory::addLayer(size_t granuleCount)
+    void SensorMemory::addLayer()
     {
-        std::vector<Granule> prevLayer = layers.back();
-        if(granuleCount > prevLayer.size()) {
-            granuleCount = prevLayer.size();
+        const std::vector<Granule> &prevLayer = layers.back();
+        if(prevLayer.size() <= 1)
+        {
+            throw std::runtime_error("Maximum amount of layers reached");
         }
+        const size_t layerIndex = layers.size();
 
         std::vector<Granule> granules;
-
-        for(size_t i = 0; i < prevLayer.size(); ++i) {
-            size_t nextIndex = std::min(i + granuleCount - 1, prevLayer.size() - 1);
-            double maxFuzzyFactor = std::max_element(prevLayer.begin() + i,
-                prevLayer.begin() + nextIndex,
-                [] (const Granule &first, const Granule &second) -> bool
+        if(layerIndex < groupSize) 
+        {
+            const size_t groupCount = layers[0].size() / groupSize;
+            const size_t granuleCount = (groupSize - layerIndex);
+            for(size_t i = 0; i < groupCount; ++i)
             {
-                return first.alpha < second.alpha;
-            })->alpha;
-
-            double granuleLowerBound = prevLayer[i].lowerBound;
-            i = nextIndex;
-            double granuleUpperBound = prevLayer[i].upperBound;
-            Granule granule(granuleLowerBound, granuleUpperBound,
-                maxFuzzyFactor, 0);
-            granules.push_back(granule);
+                const size_t groupIndex = i * (groupSize - layerIndex + 1);
+                for(size_t j = groupIndex; j < groupIndex + granuleCount; ++j)
+                {
+                    granules.push_back(this->createLinkedGranule(prevLayer[j], prevLayer[j+1]));
+                }
+            }
+        } 
+        else 
+        {
+            const size_t granuleCount = prevLayer.size() - 1;
+            for(size_t i = 0; i < granuleCount; ++i) {
+                granules.push_back(this->createLinkedGranule(prevLayer[i], prevLayer[i+1]));
+            }
         }
+
         layers.push_back(granules);
     }
 
@@ -76,41 +89,85 @@ namespace Core
 
     void SensorMemory::update(double value)
     {
-        double eps = 0.05;
-        size_t layerCount = layers.size();
+        const size_t currentCoveredCount = static_cast<size_t>(
+            std::fabs(value / granuleSize)) + 1;
+
+        // find indices of difference
+        std::vector<size_t> currentPrevDifference = this->getDifference(
+            currentCoveredCount, prevCoveredCount);
+        std::vector<size_t> prevCurrentDifference = this->getDifference(
+            prevCoveredCount, currentCoveredCount);
+
+        // update aplha and beta parameters of 0 layer
         std::vector<Granule> &bottomLayer = layers.front();
-
-        for(size_t i = 0; i < bottomLayer.size(); ++i) {
-            double granuleDelta = bottomLayer[i].upperBound 
-                - bottomLayer[i].lowerBound;
-
-            if(value >= bottomLayer[i].lowerBound 
-                && value <= bottomLayer[i].lowerBound + granuleDelta / 2) 
+        for(size_t i = 0; i <bottomLayer.size(); ++i) 
+        {
+            if(std::find(currentPrevDifference.begin(), currentPrevDifference.end(), i) 
+                != currentPrevDifference.end() && currentCoveredCount > prevCoveredCount) 
             {
-                double granuleSigma = bottomLayer[i].lowerBound 
-                    + (granuleDelta / 2) - value;
-                if(i > 0) {
-                    bottomLayer[i-1].alpha = (-1 + eps) 
-                        + granuleSigma / (granuleDelta / 2);
-                }
-                bottomLayer[i].alpha = (1 - eps) 
-                    - (granuleSigma / (granuleDelta / 2));
+                bottomLayer[i].setAlpha(Fuzzy::MAX_ALPHA - eps);
+                bottomLayer[i].setBeta(Fuzzy::MIN_BETA + eps);
             } 
-            else if(value > bottomLayer[i].lowerBound + granuleDelta / 2
-                && value <= bottomLayer[i].upperBound) 
+            else if (std::find(prevCurrentDifference.begin(), prevCurrentDifference.end(), i) 
+                != prevCurrentDifference.end() && currentCoveredCount < prevCoveredCount) 
             {
-                double granuleSigma = value - (bottomLayer[i].lowerBound 
-                    + granuleDelta / 2);
-                bottomLayer[i].alpha = (1 - granuleSigma / (granuleDelta
-                    / 2)) - eps;
-                if(i < bottomLayer.size() - 1) {
-                    bottomLayer[i+1].alpha = (-1 + eps) + granuleSigma
-                        / (granuleDelta / 2);
-                }
-                ++i;
+                bottomLayer[i].setAlpha(Fuzzy::MIN_ALPHA + eps);
+                bottomLayer[i].setBeta(Fuzzy::MIN_BETA + eps);
             } else {
-                bottomLayer[i].alpha = -1 + eps;
+                bottomLayer[i].setBeta(std::min(bottomLayer[i].getBeta() + Fuzzy::BETA_DELTA,
+                    Fuzzy::MAX_BETA));
             }
+        }
+
+        // update layers 1-n
+        for(size_t i = 1; i < layers.size(); ++i)
+        {
+            this->updateLayer(i);
+        }
+        prevCoveredCount = currentCoveredCount;
+    }
+
+    Granule SensorMemory::createLinkedGranule(const Granule &first, const Granule &second)
+    {
+            Granule granule(first.getLowerBound(), second.getUpperBound(),
+                Fuzzy::MIN_ALPHA, Fuzzy::MAX_BETA);
+            granule.linkPrevLayerGranule(first);
+            granule.linkPrevLayerGranule(second);
+            return granule;
+    }
+
+    std::vector<size_t> SensorMemory::getDifference(size_t firstSetCount, size_t secondSetCount)
+    {
+        // fill vectors with indices from 0 to setCount
+        std::vector<size_t> firstSet(firstSetCount);
+        std::iota(firstSet.begin(), firstSet.end(), 0);
+        std::vector<size_t> secondSet(secondSetCount);
+        std::iota(secondSet.begin(), secondSet.end(), 0);
+
+        // find difference
+        std::vector<size_t> difference;
+        std::set_difference(firstSet.begin(), firstSet.end(),
+            secondSet.begin(), secondSet.end(), std::inserter(
+            difference, difference.end()));
+        return difference;
+    }
+
+    void SensorMemory::updateLayer(size_t layerIndex)
+    {
+        std::vector<Granule> &layer = layers[layerIndex];
+        for(size_t i = 0; i < layer.size(); ++i) 
+        {
+            Granule &currentGranule = layer[i];
+            const std::vector<const Granule*> linkedGranules = currentGranule.getLinkedGranules();
+            double linkedAlphaSum = 0;
+            double linkedBeta = Fuzzy::MAX_BETA;
+            for(size_t j = 0; j < linkedGranules.size(); ++j)
+            {
+                linkedAlphaSum += linkedGranules[j]->getAlpha();
+                linkedBeta = std::min(linkedBeta, linkedGranules[j]->getBeta());
+            }
+            currentGranule.setAlpha(linkedAlphaSum / linkedGranules.size());
+            currentGranule.setBeta(linkedBeta);
         }
     }
 } // namespace Core
