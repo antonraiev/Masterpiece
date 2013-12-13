@@ -17,9 +17,14 @@ namespace Mastepiece
         public MainWindow()
         {
             InitializeComponent();
+
+            // add 5 layers
+            for (uint i = 0; i < 5; ++i)
+            {
+                sensorMemory.AddLayer();
+            }
             graphic = this.CreateGraphics();
-            Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 50, 2);
-            controlModel = new ControlModel(sensor, 5);
+
             for (int i = 0; i < 16; i++) granuleLabel[i] = new Label();
             Timer timer = new Timer();
             timer.Interval = 2000;
@@ -86,41 +91,31 @@ namespace Mastepiece
         void OnTimer(Object sender, EventArgs e)
         {
             valueBox.Clear();
-            controlModel.Update();
-            valueBox.Text += "Layer 1: ";
-            List<Granule> layer1 = controlModel.SensorMemory.GetGranules(0);
+            sensor.Update();
+            sensorMemory.Update(sensor.Value);
 
-
-            foreach (Granule granule in layer1)
+            for (uint i = 0; i < sensorMemory.LayerCount; ++i)
             {
-                valueBox.Text += granule.Alpha + " ";
+                List<Granule> layer = sensorMemory.GetGranules(i);
+                valueBox.Text += String.Format("Layer {0}:\r\nAlpha: ", i);
+                foreach (Granule granule in layer)
+                {
+                    valueBox.Text += granule.Alpha + " ";
+                }
+                valueBox.Text += "\r\nBeta: ";
+                foreach (Granule granule in layer)
+                {
+                    valueBox.Text += granule.Beta + " ";
+                }
+                valueBox.Text += "\r\n\r\n";
+                DrawLayer(layer, (int)i);
             }
 
-            valueBox.Text += "\r\n\r\nLayer 2: ";
-            if (controlModel.SensorMemory.LayerCount >= 2)
-            {
-                controlModel.SensorMemory.RemoveTopLayer();
-            }
-            controlModel.SensorMemory.AddLayer(2);
-            List<Granule> layer2 = controlModel.SensorMemory.GetGranules(1);
-            foreach (Granule granule in layer2)
-            {
-                valueBox.Text += granule.Alpha + " ";
-            }
-            DrawLayer(layer2, 2);
-            DrawLayer(layer1, 1);
+            //DrawLayer(layer2, 2);
+            //DrawLayer(layer1, 1);
         }
 
-        private ControlModel controlModel;
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainWindow_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        private Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 24, 2);
+        private SensorMemory sensorMemory = new SensorMemory(0, 24, 2, 3);
     }
 }

@@ -36,7 +36,7 @@
             this.valueBox.Location = new System.Drawing.Point(12, 12);
             this.valueBox.Multiline = true;
             this.valueBox.Name = "valueBox";
-            this.valueBox.Size = new System.Drawing.Size(608, 58);
+            this.valueBox.Size = new System.Drawing.Size(608, 385);
             this.valueBox.TabIndex = 0;
             // 
             // MainWindow
