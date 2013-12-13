@@ -84,14 +84,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ControlModel.h" />
     <ClInclude Include="Granule.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="ControlModel.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="SensorMemory.cpp" />
   </ItemGroup>
