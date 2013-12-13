@@ -5,7 +5,11 @@ namespace Core
 {
     namespace Fuzzy
     {
+        static const double MIN_ALPHA = -1;
+        static const double MAX_ALPHA = 1;
+        static const double MIN_BETA = 0;
         static const double MAX_BETA = 25;
+        static const double BETA_DELTA = 2;
         /*
          * Truth accumulation of alpha parameter (fuzzy truth factor of granule)
          * @param alpha1 First alpha parameter
