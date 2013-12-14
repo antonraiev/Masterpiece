@@ -50,6 +50,9 @@
     <Reference Include="CoreWrapper">
       <HintPath>..\CoreWrapper\bin\Debug\CoreWrapper.dll</HintPath>
     </Reference>
+    <Reference Include="GraphModel">
+      <HintPath>..\..\..\Graph_designer\VisualGraphModel\bin\Debug\GraphModel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +63,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VisualGraphModel">
+      <HintPath>..\..\..\Graph_designer\VisualGraphModel\bin\Debug\VisualGraphModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs">
