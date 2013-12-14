@@ -59,9 +59,6 @@
     <ClInclude Include="include\IControlMediator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ActuatorImpl.h">
-      <Filter>Header Files\Impl</Filter>
-    </ClInclude>
     <ClInclude Include="include\Actuator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
