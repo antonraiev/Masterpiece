@@ -28,7 +28,7 @@ namespace Mastepiece
  spaceXSmall = (width - (count0 + 1) * 2 * outer) / 2 / (count0 + 1);
             // add 5 layers
           
-            for (uint i = 0; i < 5; ++i)
+            for (uint i = 0; i < 43; ++i)
             {
                 sensorMemory.AddLayer();
             }
@@ -36,21 +36,21 @@ namespace Mastepiece
 
             for (int i = 0; i < 16; i++) granuleLabel[i] = new Label();
             Timer timer = new Timer();
-            timer.Interval = 2000;
+            timer.Interval = 5000;
             timer.Tick += OnTimer;
             timer.Start();
-            draw();
+            //draw();
         }
 
         public Label[] granuleLabel = new Label[17];
      
         Graphics graphic;
-        int inner = 10;
-int outer = 40;
-int levels = 5;
-int width = 971;
-int height = 500;
-int count0 = (5 - 1) * 3;
+     
+int outer = 10;
+int levels = 44;
+int width =1600;
+int height = 1000;
+int count0 = (44 - 1) * 3;
 
         float spaceY ;
 float spaceXBig;
@@ -88,68 +88,55 @@ float levelX(int i, int j,int y) {
           //  graphic.DrawRectangle(Pens.Black, 50, 100, widghtWindow - 100, heightWindow - 150);
 
 
-          
-        /*    foreach (Granule granule in layer)
-            {
-  graphic.DrawEllipse(Pens.Black, startX, startY, 50, 50);
-  startX = startX + 75;
-               
-            }*/
+ 
         }
 
+        double [][] alpha = new double[44][];
+    
             void draw() {
   //background(255, 255, 255);
- // strokeWeight(2);
-               
+ // strokeWeight(2); 
+                int radius = 5;
+                double a = 0 ;
+                SolidBrush mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * 1), (int)(255 * (1 - 1)), 0));     
   int i, j;
   for(i = 0; i < levels - 1; ++i) {
     for(j = 0; j < i; ++j) {
       graphic.DrawLine(Pens.Black,levelXBig(j, i), levelY(levels + 1 - i), levelXBig(j, i + 1), levelY(levels - i));
-      graphic.DrawEllipse(Pens.Blue, levelXBig(j, i)-20, levelY(levels + 1 - i)-20, outer, outer);
+
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXBig(j + 1, i + 1), levelY(levels - i));
    //   graphic.DrawEllipse(Pens.Blue, levelXBig(j + 1, i + 1) - 20, levelY(levels - i) - 20, outer, outer);
-   
+      if (alpha[i].Length > j) { a = (alpha[i][j] + 1) / 2; }
+      mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+      graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
     }
   }
   for(j = 0; j < i; ++j) {
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXSmall(2 * j, count0 / 3 * 2), levelY(levels - i));
-      graphic.DrawEllipse(Pens.Blue, levelXBig(j, i)-20, levelY(levels + 1 - i)-20, outer, outer);
+    
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXSmall(2 * j + 1, count0 / 3 * 2), levelY(levels - i));
+      if (alpha[i].Length > j) { a = (alpha[i][j] + 1) / 2; }
+      mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+     graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
      // graphic.DrawEllipse(Pens.Blue, levelXSmall(2 * j + 1, count0 / 3 * 2) - 20, levelY(levels - i) - 20, outer, outer);
   }
   ++i;
   for(j = 0; j < count0 / 3 * 2; ++j) {
       graphic.DrawLine(Pens.Black, levelXSmall(j, count0 / 3 * 2), levelY(levels + 1 - i), levelXSmall(j / 2 * 3 + j % 2, count0), levelY(levels - i));
-      graphic.DrawEllipse(Pens.Blue, levelXSmall(j, count0 / 3 * 2)-20, levelY(levels + 1 - i)-20, outer, outer);
-      graphic.DrawEllipse(Pens.Blue, levelXSmall(j / 2 * 3 + j % 2, count0) - 20, levelY(levels - i) - 20, outer, outer);
+
     graphic.DrawLine(Pens.Black,(levelXSmall(j, count0 / 3 * 2)), levelY(levels + 1 - i), levelXSmall(j / 2 * 3 + j % 2 + 1, count0), levelY(levels - i));
-    graphic.DrawEllipse(Pens.Blue, levelXSmall(j / 2 * 3 + j % 2 + 1, count0) - 20, levelY(levels - i) - 20, outer, outer);
+    if (alpha[i-1].Length > j) { a = (alpha[1][j] + 1) / 2; }
+    mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+    graphic.FillEllipse(mySolidBrush, levelXSmall(j, count0 / 3 * 2) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+
+//    graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2, count0) - radius, levelY(levels - i) - radius, outer, outer);
+
+       mySolidBrush = new SolidBrush(Color.FromArgb(255,(int)(255 * a),(int) (255 * (1 - a)), 0));
+      // graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2 + 1, count0) - radius, levelY(levels - i) - radius, outer, outer);
+      
   }
 
 
-
-  for (uint ii = 0; ii < sensorMemory.LayerCount; ++ii)
-  {
-    //     float g = gamma(alpha[time][i][j], betta[time][i][j]);
-  //  fill(255 * (1 - g), 255 * (1 - g), 255); 
-      List<Granule> layer = sensorMemory.GetGranules(ii);
-      //j = layer.Count;
-      int y = layer.Count;
-    //  graphic.DrawEllipse(Pens.Blue,levelX(i, j,y), levelY(i), outer, outer);
-    //float a = (alpha[time][i][j] + 1) / 2;
-    //fill(255 * a, 255 * (1 - a), 0);
-    //ellipse(levelX(i, j), levelY(i), inner, inner);
-    //fill(255, 255, 255); 
-  }
-
-
-  
- // fill(0, 0, 0);
- // textSize(64);
-  //text(data[time], 50, height / 3 * 2);
-  //text(betta[time][0][0], 50, height / 3. * 2.);
-  //text(gamma(alpha[time][0][0], betta[time][0][0]), 50, height / 3. * 2. + 50);
-  //text(gamma(0, betta[time][0][0]), 50, height / 3. * 2. + 50);
 }
         
 
@@ -200,20 +187,26 @@ float levelX(int i, int j,int y) {
             }*/
            
         
-
+        //int [] value=[];
+ 
         void OnTimer(Object sender, EventArgs e)
         {
             valueBox.Clear();
             sensor.Update();
+
             sensorMemory.Update(sensor.Value);
 
             for (uint i = 0; i < sensorMemory.LayerCount; ++i)
             {
                 List<Granule> layer = sensorMemory.GetGranules(i);
                 valueBox.Text += String.Format("Layer {0}:\r\nAlpha: ", i);
+                int j=0;
                 foreach (Granule granule in layer)
                 {
                     valueBox.Text += granule.Alpha + " ";
+                if (j==0)    alpha[i] = new double[layer.Count];
+                    alpha[i][j] = granule.Alpha;
+                    j++;
                 }
                 valueBox.Text += "\r\nBeta: ";
                 foreach (Granule granule in layer)
@@ -228,7 +221,7 @@ float levelX(int i, int j,int y) {
             //DrawLayer(layer1, 1);
         }
 
-        private Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 24, 2);
-        private SensorMemory sensorMemory = new SensorMemory(0, 24, 2, 3);
+        private Sensor sensor = new Sensor(SensorType.TEMPERATURE_SENSOR, 0, 255, 2);
+        private SensorMemory sensorMemory = new SensorMemory(0,255, 2, 3);
     }
 }
