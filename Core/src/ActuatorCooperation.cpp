@@ -9,15 +9,15 @@ namespace Core
         size_t actuatorStartDelay, size_t actuatorStopDelay)
     {
         const int factor = 10;
-        size_t negativeActuatorCount = actuatorCount / (factor + 1);
-        size_t positiveActuatorCount = actuatorCount - negativeActuatorCount;
+        size_t positiveActuatorCount = actuatorCount;
+        size_t negativeActuatorCount = actuatorCount / factor;
 
         const size_t circleCount = static_cast<size_t>(1 / circleDiff);
-        for(size_t i = 0; i < circleCount; ++i)
+        for(int i = 0; i < circleCount; ++i)
         {
             Semicircle semicircle;
-            semicircle.lowerBound = -1 + i * circleDiff;
-            semicircle.upperBound = -1 + (i+1) * circleDiff;
+            semicircle.lowerBound = -i * circleDiff;
+            semicircle.upperBound = -(i+1) * circleDiff;
             negativeActuators.push_back(std::make_pair(semicircle, std::vector<Actuator>()));
         }
         for(size_t i = 0; i < circleCount; ++i)
