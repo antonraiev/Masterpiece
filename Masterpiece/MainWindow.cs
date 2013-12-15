@@ -36,7 +36,7 @@ namespace Mastepiece
 
             for (int i = 0; i < 16; i++) granuleLabel[i] = new Label();
             Timer timer = new Timer();
-            timer.Interval = 5000;
+            timer.Interval = 2000;
             timer.Tick += OnTimer;
             timer.Start();
             //draw();
@@ -105,35 +105,55 @@ float levelX(int i, int j,int y) {
       graphic.DrawLine(Pens.Black,levelXBig(j, i), levelY(levels + 1 - i), levelXBig(j, i + 1), levelY(levels - i));
 
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXBig(j + 1, i + 1), levelY(levels - i));
-   //   graphic.DrawEllipse(Pens.Blue, levelXBig(j + 1, i + 1) - 20, levelY(levels - i) - 20, outer, outer);
-      if (alpha[i].Length > j) { a = (alpha[i][j] + 1) / 2; }
+
+      if (alpha[levels - i].Length > j) { a = (alpha[levels - i][j] + 1) / 2; }
       mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
-      graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+     graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
     }
   }
-  for(j = 0; j < i; ++j) {
+
+  for (j = 0; j < alpha[2].Length; ++j)
+  {
+      
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXSmall(2 * j, count0 / 3 * 2), levelY(levels - i));
     
       graphic.DrawLine(Pens.Black, levelXBig(j, i), levelY(levels + 1 - i), levelXSmall(2 * j + 1, count0 / 3 * 2), levelY(levels - i));
-      if (alpha[i].Length > j) { a = (alpha[i][j] + 1) / 2; }
-      mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
-     graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
-     // graphic.DrawEllipse(Pens.Blue, levelXSmall(2 * j + 1, count0 / 3 * 2) - 20, levelY(levels - i) - 20, outer, outer);
+  
+          a = (alpha[2][j] + 1) / 2;
+          mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+          graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+      
+   
   }
+  graphic.FillEllipse(mySolidBrush, levelXBig(j, i) - radius, levelY(levels + 1 - i) - radius, outer, outer);
   ++i;
   for(j = 0; j < count0 / 3 * 2; ++j) {
       graphic.DrawLine(Pens.Black, levelXSmall(j, count0 / 3 * 2), levelY(levels + 1 - i), levelXSmall(j / 2 * 3 + j % 2, count0), levelY(levels - i));
 
     graphic.DrawLine(Pens.Black,(levelXSmall(j, count0 / 3 * 2)), levelY(levels + 1 - i), levelXSmall(j / 2 * 3 + j % 2 + 1, count0), levelY(levels - i));
-    if (alpha[i-1].Length > j) { a = (alpha[1][j] + 1) / 2; }
-    mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
-    graphic.FillEllipse(mySolidBrush, levelXSmall(j, count0 / 3 * 2) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+    if (alpha[1].Length > j)
+    {
+        a = (alpha[1][j] + 1) / 2;
+        mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+        graphic.FillEllipse(mySolidBrush, levelXSmall(j, count0 / 3 * 2) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+    }
+    else
+    {
+        graphic.FillEllipse(mySolidBrush, levelXSmall(j, count0 / 3 * 2) - radius, levelY(levels + 1 - i) - radius, outer, outer);
+    }
 
-//    graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2, count0) - radius, levelY(levels - i) - radius, outer, outer);
-
-       mySolidBrush = new SolidBrush(Color.FromArgb(255,(int)(255 * a),(int) (255 * (1 - a)), 0));
-      // graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2 + 1, count0) - radius, levelY(levels - i) - radius, outer, outer);
+    if (alpha[0].Length > j)
+    {
+        a = (alpha[0][j / 2 * 3 + j % 2] + 1) / 2;
+        mySolidBrush = new SolidBrush(Color.FromArgb(255, (int)(255 * a), (int)(255 * (1 - a)), 0));
+        graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2, count0) - radius, levelY(levels - i) - radius, outer, outer);
+           
+       a = (alpha[0][j / 2 * 3 + j % 2 ] + 1) / 2; 
+mySolidBrush = new SolidBrush(Color.FromArgb(255,(int)(255 * a),(int) (255 * (1 - a)), 0));
+       graphic.FillEllipse(mySolidBrush, levelXSmall(j / 2 * 3 + j % 2 + 1, count0) - radius, levelY(levels - i) - radius, outer, outer);
       
+    }
+
   }
 
 
@@ -187,14 +207,18 @@ float levelX(int i, int j,int y) {
             }*/
            
         
-        //int [] value=[];
- 
+        int [] value={100,92,88,79,70,68,60,51,42,36,25,16,8,2};
+        int k = 0; 
         void OnTimer(Object sender, EventArgs e)
         {
             valueBox.Clear();
             sensor.Update();
-
-            sensorMemory.Update(sensor.Value);
+         //k  = 0;
+            sensorMemory.Update(value[k]);
+            valueBox.Text += value[k];
+            k++;
+            if (k == 14) k = 0;
+            
 
             for (uint i = 0; i < sensorMemory.LayerCount; ++i)
             {
