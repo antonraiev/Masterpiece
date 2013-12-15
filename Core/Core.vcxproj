@@ -73,6 +73,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\ActuatorCooperation.h" />
     <ClInclude Include="include\Actuator.h" />
     <ClInclude Include="include\EffectorMemoryImpl.h" />
     <ClInclude Include="include\EffectorMemory.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="include\SensorMemory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ActuatorCooperation.cpp" />
     <ClCompile Include="src\Granule.cpp" />
     <ClCompile Include="src\Actuator.cpp" />
     <ClCompile Include="src\EffectorMemory.cpp" />
