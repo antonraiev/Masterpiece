@@ -3,38 +3,30 @@
 
 #include <vector>
 
-#include "Actuator.h"
+#include "ActuatorCircle.h"
 
 namespace Core
 {
-    struct Semicircle
-    {
-        double lowerBound;
-        double upperBound;
-    };
 
     class ActuatorCooperation
     {
     public:
-        explicit ActuatorCooperation(double circleDiff, size_t actuatorCount,
-            size_t actuatorStartDelay, size_t actuatorStopDelay);
+        explicit ActuatorCooperation(double circleDiff, size_t positiveActuatorCount,
+            size_t negativeActuatorCount, size_t startDelay = 1, size_t stopDelay = 2);
         size_t getCircleCount() const;
 
-        const Semicircle& getPositiveCircle(size_t circleIndex) const;
-        const Semicircle& getNegativeCircle(size_t circleIndex) const;
-
-        size_t getPositiveActuatorCount(size_t circleIndex) const;
-        size_t getNegativeActuatorCount(size_t circleIndex) const;
-
-        Actuator& getPositiveActuator(size_t circleIndex, size_t actuatorIndex);
-        Actuator& getNegativeActuator(size_t circleIndex, size_t actuatorIndex);
+        ActuatorCircle& getPositiveCircle(size_t circleIndex);
+        ActuatorCircle& getNegativeCircle(size_t circleIndex);
 
         void update(double alpha);
         int getControl() const;
 
     private:
-        std::vector<std::pair<Semicircle, std::vector<Actuator> > > positiveActuators;
-        std::vector<std::pair<Semicircle, std::vector<Actuator> > > negativeActuators;
+        std::mt19937 mersenneTwisterEngine;
+
+        size_t circleCount;
+        std::vector<ActuatorCircle> positiveCircles;
+        std::vector<ActuatorCircle> negativeCircles;
     };
 }
 
