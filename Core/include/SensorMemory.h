@@ -2,6 +2,7 @@
 #define SENSORMEMORY_H
 
 #include <vector>
+#include <cstdlib>
 
 #include "Granule.h"
 

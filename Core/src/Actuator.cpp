@@ -5,8 +5,8 @@ namespace Core
     Actuator::Actuator(size_t startDelay, size_t stopDelay) :
         startDelay(startDelay),
         stopDelay(stopDelay),
-        activeDelay(0),
-        heatingDelay(0)
+        heatingDelay(0),
+        activeDelay(0)
     {
         state = ActuatorState::REST;
     }
@@ -80,7 +80,7 @@ namespace Core
         }
     }
 
-    void Actuator::processHeatingState(double alpha)
+    void Actuator::processHeatingState(double)
     {
         --heatingDelay;
         if(heatingDelay == 0) {

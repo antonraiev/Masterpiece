@@ -81,14 +81,17 @@
 	    (object Class "User"
 		quid       	"5241666B0378"
 		documentation 	"The only user of the system. Acts as normal user (not administrator or so)"
-		stereotype 	"Actor")
+		stereotype 	"Actor"
+		cardinality 	(value Cardinality "1..1"))
 	    (object UseCase "Control the robot manually"
 		quid       	"524167B1014F"
 		documentation 	"Allow the user to control robot manually. It's necessary to allow the user get familliar with robot."
+		stereotype 	"System use case"
 		rank       	"4")
 	    (object UseCase "Use situational control for the robot"
 		quid       	"524167B50347"
 		documentation 	"Allow the user to use situational control for the robot (specify the desired behavior)"
+		stereotype 	"Business Use Case"
 		visible_modules 	(list dependency_list
 		    (object Dependency_Relationship
 			quid       	"524F03C50140"
@@ -106,14 +109,17 @@
 	    (object UseCase "Find a spot with desired temperature, humidity, lighting"
 		quid       	"524F03A00316"
 		documentation 	"A main goal of the robot: find some place with desired parameters"
+		stereotype 	"Business Use Case Realization"
 		rank       	"7")
 	    (object UseCase "Avoid obstacles"
 		quid       	"524F03AA0313"
 		documentation 	"Robot should avoid walls and mines in a maze"
+		stereotype 	"Business Use Case Realization"
 		rank       	"6")
 	    (object UseCase "Watch results of the control"
 		quid       	"524F04B80249"
 		documentation 	"Allow the user watch the results of the control (watch the route of the robot and a state of the model: sensor memory, prototype handlers, effector signals)."
+		stereotype 	"Business Use Case"
 		visible_modules 	(list dependency_list
 		    (object Dependency_Relationship
 			quid       	"5253DAAD00AB"
@@ -131,10 +137,12 @@
 	    (object UseCase "Watch fuzzy memory state"
 		quid       	"5253DA2C0225"
 		documentation 	"Allow the user to watch the state of sensor memory, prototype memory, effector memory"
+		stereotype 	"Business Use Case Realization"
 		rank       	"2")
 	    (object UseCase "Watch a route of the robot"
 		quid       	"5253DA490252"
 		documentation 	"Allow the user to watch a route of the robot in a maze with walls and mines"
+		stereotype 	"Business Use Case Realization"
 		rank       	"4")
 	    (object Association "$UNNAMED$0"
 		quid       	"524171030356"
@@ -221,7 +229,7 @@
 		origin_y   	219
 		items      	(list diagram_item_list
 		    (object UseCaseView "Use Case View::Find a spot with desired temperature, humidity, lighting" @1
-			location   	(2105, 419)
+			location   	(2189, 407)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -233,17 +241,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@1
-			    location   	(2105, 557)
+			    location   	(2188, 583)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Find a spot with desired temperature, humidity, lighting")
+			icon       	"Business Use Case Realization"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"524F03A00316"
-			height     	118)
+			width      	306
+			height     	194)
 		    (object UseCaseView "Use Case View::Avoid obstacles" @2
 			location   	(2191, 1088)
 			font       	(object Font
@@ -257,17 +267,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@2
-			    location   	(2191, 1226)
+			    location   	(2190, 1264)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Avoid obstacles")
+			icon       	"Business Use Case Realization"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"524F03AA0313"
-			height     	118)
+			width      	306
+			height     	194)
 		    (object UseCaseView "Use Case View::Use situational control for the robot" @3
 			location   	(1096, 784)
 			font       	(object Font
@@ -281,17 +293,18 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@3
-			    location   	(1096, 922)
+			    location   	(1095, 959)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Use situational control for the robot")
+			icon       	"Business Use Case"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"524167B50347"
-			height     	118)
+			width      	306)
 		    (object UseCaseView "Use Case View::Control the robot manually" @4
 			location   	(1070, 339)
 			font       	(object Font
@@ -305,12 +318,22 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@4
-			    location   	(1070, 477)
+			    location   	(1070, 527)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
 			    justify    	0
 			    label      	"Control the robot manually")
+			stereotype 	(object ItemLabel
+			    Parent_View 	@4
+			    location   	(1070, 452)
+			    anchor     	10
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	419
+			    justify    	0
+			    label      	"<<System use case>>")
+			icon       	"System use case"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
@@ -329,17 +352,18 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@5
-			    location   	(1068, 1353)
+			    location   	(1067, 1390)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Watch results of the control")
+			icon       	"Business Use Case"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"524F04B80249"
-			height     	118)
+			width      	306)
 		    (object ClassView "Class" "Use Case View::User" @6
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
@@ -369,7 +393,7 @@
 			annotation 	8
 			autoResize 	TRUE)
 		    (object AssociationViewNew "$UNNAMED$3" @7
-			location   	(743, 761)
+			location   	(723, 761)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -385,7 +409,7 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "obey" @8
 				Parent_View 	@7
-				location   	(435, 118)
+				location   	(415, 118)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -397,7 +421,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @9
 				    Parent_View 	@8
-				    location   	(902, 763)
+				    location   	(868, 764)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -422,12 +446,12 @@
 				client     	@7
 				supplier   	@3
 				vertices   	(list Points
-				    (743, 761)
-				    (984, 775))
+				    (723, 761)
+				    (944, 774))
 				line_style 	0)
 			    (object RoleView "control" @10
 				Parent_View 	@7
-				location   	(435, 118)
+				location   	(415, 118)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -439,7 +463,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @11
 				    Parent_View 	@10
-				    location   	(579, 748)
+				    location   	(572, 749)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -464,7 +488,7 @@
 				client     	@7
 				supplier   	@6
 				vertices   	(list Points
-				    (743, 761)
+				    (723, 761)
 				    (502, 748))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$7" @12
@@ -496,7 +520,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @14
 				    Parent_View 	@13
-				    location   	(789, 504)
+				    location   	(758, 542)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -512,8 +536,8 @@
 				    max_width  	128
 				    justify    	0
 				    label      	"+obey"
-				    pctDist    	0.805767
-				    height     	13
+				    pctDist    	0.565223
+				    height     	1
 				    orientation 	0)
 				stereotype 	TRUE
 				line_color 	3342489
@@ -538,7 +562,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @16
 				    Parent_View 	@15
-				    location   	(560, 664)
+				    location   	(561, 665)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -567,7 +591,7 @@
 				    (502, 706))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$8" @17
-			location   	(746, 972)
+			location   	(721, 954)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -583,7 +607,7 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "show" @18
 				Parent_View 	@17
-				location   	(257, 432)
+				location   	(232, 414)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -595,7 +619,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @19
 				    Parent_View 	@18
-				    location   	(917, 1153)
+				    location   	(872, 1120)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -620,12 +644,12 @@
 				client     	@17
 				supplier   	@5
 				vertices   	(list Points
-				    (746, 972)
-				    (990, 1156))
+				    (721, 954)
+				    (940, 1120))
 				line_style 	0)
 			    (object RoleView "observe" @20
 				Parent_View 	@17
-				location   	(257, 432)
+				location   	(232, 414)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -637,7 +661,7 @@
 				    default_color 	TRUE)
 				label      	(object SegLabel @21
 				    Parent_View 	@20
-				    location   	(576, 839)
+				    location   	(569, 835)
 				    font       	(object Font
 					size       	10
 					face       	"Arial"
@@ -662,7 +686,7 @@
 				client     	@17
 				supplier   	@6
 				vertices   	(list Points
-				    (746, 972)
+				    (721, 954)
 				    (502, 788))
 				line_style 	0)))
 		    (object DependencyView "" @22
@@ -677,7 +701,7 @@
 			    default_color 	TRUE)
 			stereotype 	(object SegLabel @23
 			    Parent_View 	@22
-			    location   	(1483, 640)
+			    location   	(1470, 651)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -701,8 +725,8 @@
 			client     	@3
 			supplier   	@1
 			vertices   	(list Points
-			    (1204, 742)
-			    (1831, 516))
+			    (1246, 729)
+			    (1748, 556))
 			line_style 	0)
 		    (object DependencyView "" @24
 			font       	(object Font
@@ -716,7 +740,7 @@
 			    default_color 	TRUE)
 			stereotype 	(object SegLabel @25
 			    Parent_View 	@24
-			    location   	(1768, 967)
+			    location   	(1669, 940)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -740,8 +764,8 @@
 			client     	@3
 			supplier   	@2
 			vertices   	(list Points
-			    (1413, 869)
-			    (2079, 1054))
+			    (1246, 823)
+			    (2039, 1043))
 			line_style 	0)
 		    (object UseCaseView "Use Case View::Watch fuzzy memory state" @26
 			location   	(1830, 1486)
@@ -756,17 +780,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@26
-			    location   	(1830, 1624)
+			    location   	(1829, 1662)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Watch fuzzy memory state")
+			icon       	"Business Use Case Realization"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"5253DA2C0225"
-			height     	118)
+			width      	306
+			height     	194)
 		    (object UseCaseView "Use Case View::Watch a route of the robot" @27
 			location   	(409, 1484)
 			font       	(object Font
@@ -780,17 +806,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@27
-			    location   	(409, 1622)
+			    location   	(408, 1660)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	630
+			    max_width  	879
 			    justify    	0
 			    label      	"Watch a route of the robot")
+			icon       	"Business Use Case Realization"
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"5253DA490252"
-			height     	118)
+			width      	306
+			height     	194)
 		    (object DependencyView "" @28
 			font       	(object Font
 			    size       	10
@@ -803,7 +831,7 @@
 			    default_color 	TRUE)
 			stereotype 	(object SegLabel @29
 			    Parent_View 	@28
-			    location   	(702, 1386)
+			    location   	(673, 1357)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -819,16 +847,16 @@
 			    max_width  	450
 			    justify    	0
 			    label      	"<<include>>"
-			    pctDist    	0.407487
-			    height     	22
-			    orientation 	0)
+			    pctDist    	0.665342
+			    height     	14
+			    orientation 	1)
 			line_color 	3342489
 			quidu      	"5253DAAD00AB"
 			client     	@5
 			supplier   	@27
 			vertices   	(list Points
-			    (814, 1317)
-			    (517, 1438))
+			    (916, 1274)
+			    (559, 1419))
 			line_style 	0)
 		    (object DependencyView "" @30
 			font       	(object Font
@@ -842,7 +870,7 @@
 			    default_color 	TRUE)
 			stereotype 	(object SegLabel @31
 			    Parent_View 	@30
-			    location   	(1558, 1375)
+			    location   	(1489, 1352)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -866,8 +894,8 @@
 			client     	@5
 			supplier   	@26
 			vertices   	(list Points
-			    (1321, 1302)
-			    (1720, 1445))
+			    (1218, 1267)
+			    (1677, 1430))
 			line_style 	0)))))
     root_category 	(object Class_Category "Logical View"
 	quid       	"524166500216"
@@ -2584,7 +2612,7 @@
 				    (object Message "OnTimer( )"
 					quid       	"528FC8D60059"
 					documentation 	"Update itself and the whole model on timer"
-					frequency  	"Aperiodic"
+					frequency  	"Periodic"
 					synchronization 	"Simple"
 					dir        	"FromClientToSupplier"
 					sequence   	"1"
@@ -3838,7 +3866,7 @@
 		    max_height 	28350
 		    max_width  	21600
 		    origin_x   	0
-		    origin_y   	944
+		    origin_y   	943
 		    items      	(list diagram_item_list
 			(object StateView "StartState" "Idle" @33
 			    location   	(136, 333)
@@ -5428,7 +5456,7 @@
 			    supplier   	@101
 			    vertices   	(list Points
 				(1533, 1486)
-				(1661, 1496))
+				(1661, 1495))
 			    line_style 	0
 			    x_offset   	FALSE)
 			(object TransView "" @104
@@ -5516,7 +5544,7 @@
 			    supplier   	@106
 			    vertices   	(list Points
 				(1541, 994)
-				(1658, 1002))
+				(1658, 1001))
 			    line_style 	0
 			    x_offset   	FALSE)
 			(object TransView "" @109
@@ -5551,7 +5579,7 @@
 			    supplier   	@94
 			    vertices   	(list Points
 				(1677, 545)
-				(1958, 433))
+				(1959, 432))
 			    line_style 	0
 			    x_offset   	FALSE)
 			(object TransView "" @112
@@ -11011,7 +11039,7 @@
 			    location   	(418, 387)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	467
+			    max_width  	471
 			    justify    	0
 			    label      	"RouteView")
 			icon       	"View"
@@ -11250,7 +11278,7 @@
 			    location   	(2904, 2892)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	463
+			    max_width  	467
 			    justify    	0
 			    label      	"sensorMemoryView")
 			icon       	"View"
@@ -11281,7 +11309,7 @@
 			    location   	(3707, 2711)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	467
+			    max_width  	471
 			    justify    	0
 			    label      	"prototypeMemoryView")
 			icon       	"View"
@@ -11312,7 +11340,7 @@
 			    location   	(3480, 303)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	471
+			    max_width  	474
 			    justify    	0
 			    label      	"effectorMemoryView")
 			icon       	"View"
@@ -13552,30 +13580,30 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@496
-			    location   	(1026, 1331)
+			    location   	(1025, 1331)
 			    fill_color 	13434879
 			    anchor_loc 	3
 			    nlines     	2
-			    max_width  	303
+			    max_width  	306
 			    justify    	1
 			    label      	"RobotControl")
 			stereotype 	(object ItemLabel
 			    Parent_View 	@496
-			    location   	(1026, 1256)
+			    location   	(1025, 1256)
 			    fill_color 	13434879
 			    anchor     	10
 			    anchor_loc 	3
 			    nlines     	1
-			    max_width  	300
+			    max_width  	306
 			    justify    	1
 			    label      	"<<Application>>")
 			icon_style 	"Decoration"
 			line_color 	3342489
 			fill_color 	13434879
 			quidu      	"52AE408B0388"
-			width      	546
+			width      	552
 			autoResize 	TRUE
-			width      	546
+			width      	552
 			height     	162)
 		    (object ModView "Component View::Program.cs" "SubType" "Main" @497
 			location   	(1597, 1538)
@@ -13612,7 +13640,7 @@
 			supplier   	@496
 			vertices   	(list Points
 			    (1493, 1487)
-			    (1273, 1384))
+			    (1272, 1384))
 			line_style 	0)
 		    (object ModView "Component View::FuzzyOperations" "SubType" "Specification" @499
 			location   	(2214, 774)
@@ -13795,7 +13823,7 @@
 			client     	@496
 			supplier   	@494
 			vertices   	(list Points
-			    (1023, 1226)
+			    (1022, 1226)
 			    (636, 836))
 			line_style 	0)
 		    (object ModVisView "" @508
@@ -13805,7 +13833,7 @@
 			client     	@496
 			supplier   	@505
 			vertices   	(list Points
-			    (1120, 1224)
+			    (1121, 1224)
 			    (1209, 913))
 			line_style 	0))))
 	category   	"Logical View"
@@ -13836,8 +13864,9 @@
 			supplier_is_device 	FALSE
 			characteristics 	"Baud rate: 115200 bit/s"))
 		characteristics 	
-|4 Gb on hard drive
+|Cpu: Intel Core 2 Duo
 |1 Gb RAM
+|4 Gb on hard drive
 |Intel videocard
 |
 |Windows 8

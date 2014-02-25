@@ -27,6 +27,9 @@
     <ClInclude Include="FuzzyOperationsTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ActuatorCooperationTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gtest-all.cc">

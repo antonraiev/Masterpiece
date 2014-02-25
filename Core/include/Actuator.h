@@ -1,6 +1,8 @@
 #ifndef ACTUATOR_H
 #define ACTUATOR_H
 
+#include <cstdlib>
+
 namespace Core
 {
     enum class ActuatorState {REST, HEATING, ACTIVE};

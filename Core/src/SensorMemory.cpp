@@ -14,8 +14,8 @@ namespace Core
 
     SensorMemory::SensorMemory(double lowerBound, double upperBound, 
             double granuleSize, size_t groupSize) :
-        granuleSize(granuleSize),
-        groupSize(groupSize)
+        groupSize(groupSize),
+        granuleSize(granuleSize)
     {
         if(upperBound <= lowerBound) {
             throw std::invalid_argument("Upper bound should be greater than lower bound");
