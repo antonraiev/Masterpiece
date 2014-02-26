@@ -104,6 +104,13 @@
 extern "C" {
 #endif
 
+struct ssh_counter_struct {
+    uint64_t in_bytes;
+    uint64_t out_bytes;
+    uint64_t in_packets;
+    uint64_t out_packets;
+};
+typedef struct ssh_counter_struct *ssh_counter;
 
 typedef struct ssh_agent_struct* ssh_agent;
 typedef struct ssh_buffer_struct* ssh_buffer;
@@ -377,7 +384,7 @@ LIBSSH_API int ssh_channel_open_x11(ssh_channel channel, const char *orig_addr, 
 LIBSSH_API int ssh_channel_poll(ssh_channel channel, int is_stderr);
 LIBSSH_API int ssh_channel_poll_timeout(ssh_channel channel, int timeout, int is_stderr);
 LIBSSH_API int ssh_channel_read(ssh_channel channel, void *dest, uint32_t count, int is_stderr);
-LIBSSH_API int ssh_channel_read_timeout(ssh_channel channel, void *dest, uint32_t count, int is_stderr, int timeout);
+LIBSSH_API int ssh_channel_read_timeout(ssh_channel channel, void *dest, uint32_t count, int is_stderr, int timeout_ms);
 LIBSSH_API int ssh_channel_read_nonblocking(ssh_channel channel, void *dest, uint32_t count,
     int is_stderr);
 LIBSSH_API int ssh_channel_request_env(ssh_channel channel, const char *name, const char *value);
@@ -395,6 +402,8 @@ LIBSSH_API int ssh_channel_send_eof(ssh_channel channel);
 LIBSSH_API int ssh_channel_select(ssh_channel *readchans, ssh_channel *writechans, ssh_channel *exceptchans, struct
         timeval * timeout);
 LIBSSH_API void ssh_channel_set_blocking(ssh_channel channel, int blocking);
+LIBSSH_API void ssh_channel_set_counter(ssh_channel channel,
+                                        ssh_counter counter);
 LIBSSH_API int ssh_channel_write(ssh_channel channel, const void *data, uint32_t len);
 LIBSSH_API uint32_t ssh_channel_window_size(ssh_channel channel);
 
@@ -405,9 +414,19 @@ LIBSSH_API const char *ssh_copyright(void);
 LIBSSH_API void ssh_disconnect(ssh_session session);
 LIBSSH_API char *ssh_dirname (const char *path);
 LIBSSH_API int ssh_finalize(void);
-LIBSSH_API ssh_channel ssh_forward_accept(ssh_session session, int timeout_ms);
-LIBSSH_API int ssh_forward_cancel(ssh_session session, const char *address, int port);
-LIBSSH_API int ssh_forward_listen(ssh_session session, const char *address, int port, int *bound_port);
+
+/* REVERSE PORT FORWARDING */
+LIBSSH_API ssh_channel ssh_channel_accept_forward(ssh_session session,
+                                                  int timeout_ms,
+                                                  int *destination_port);
+LIBSSH_API int ssh_channel_cancel_forward(ssh_session session,
+                                          const char *address,
+                                          int port);
+LIBSSH_API int ssh_channel_listen_forward(ssh_session session,
+                                          const char *address,
+                                          int port,
+                                          int *bound_port);
+
 LIBSSH_API void ssh_free(ssh_session session);
 LIBSSH_API const char *ssh_get_disconnect_message(ssh_session session);
 LIBSSH_API const char *ssh_get_error(void *error);
@@ -428,7 +447,12 @@ LIBSSH_API int ssh_get_publickey_hash(const ssh_key key,
                                       unsigned char **hash,
                                       size_t *hlen);
 
+/* DEPRECATED FUNCTIONS */
 SSH_DEPRECATED LIBSSH_API int ssh_get_pubkey_hash(ssh_session session, unsigned char **hash);
+SSH_DEPRECATED LIBSSH_API ssh_channel ssh_forward_accept(ssh_session session, int timeout_ms);
+SSH_DEPRECATED LIBSSH_API int ssh_forward_cancel(ssh_session session, const char *address, int port);
+SSH_DEPRECATED LIBSSH_API int ssh_forward_listen(ssh_session session, const char *address, int port, int *bound_port);
+
 
 LIBSSH_API int ssh_get_random(void *where,int len,int strong);
 LIBSSH_API int ssh_get_version(ssh_session session);
@@ -560,6 +584,8 @@ LIBSSH_API int ssh_select(ssh_channel *channels, ssh_channel *outchannels, socke
 LIBSSH_API int ssh_service_request(ssh_session session, const char *service);
 LIBSSH_API int ssh_set_agent_channel(ssh_session session, ssh_channel channel);
 LIBSSH_API void ssh_set_blocking(ssh_session session, int blocking);
+LIBSSH_API void ssh_set_counters(ssh_session session, ssh_counter scounter,
+                                 ssh_counter rcounter);
 LIBSSH_API void ssh_set_fd_except(ssh_session session);
 LIBSSH_API void ssh_set_fd_toread(ssh_session session);
 LIBSSH_API void ssh_set_fd_towrite(ssh_session session);
@@ -627,6 +653,8 @@ LIBSSH_API int ssh_event_remove_session(ssh_event event, ssh_session session);
 LIBSSH_API void ssh_event_free(ssh_event event);
 LIBSSH_API const char* ssh_get_clientbanner(ssh_session session);
 LIBSSH_API const char* ssh_get_serverbanner(ssh_session session);
+LIBSSH_API const char* ssh_get_cipher_in(ssh_session session);
+LIBSSH_API const char* ssh_get_cipher_out(ssh_session session);
 
 #ifndef LIBSSH_LEGACY_0_4
 #include "libssh/legacy.h"
