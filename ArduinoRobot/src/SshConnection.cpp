@@ -1,5 +1,7 @@
 #include "SshConnection.h"
 
+#define LIBSSH_STATIC 1
+
 #include <libssh/libsshpp.hpp>
 #include <vector>
 
@@ -17,19 +19,19 @@ namespace Arduino
         session->userauthPassword(password.c_str());
 
         channel.reset(new ssh::Channel(*session));
+        channel->openSession();
+        channel->requestPty("xterm");
+        channel->changePtySize(80, 25);
+        channel->requestShell();
     }
 
     void SshConnection::send(const std::string &command)
     {
-        channel->openSession();
-        channel->requestExec(command.c_str());
+        channel->write(command.c_str(), command.length());
     }
 
     std::future<std::string> SshConnection::receive() const
     {
-        channel->requestPty("xterm");
-        channel->changePtySize(80, 25);
-        channel->requestShell();
         ssh::Channel &rawChannel = *channel.get();
         return std::async(
             [&rawChannel]() -> std::string
@@ -50,6 +52,8 @@ namespace Arduino
 
     SshConnection::~SshConnection()
     {
+        channel->close();
+        channel->sendEof();
         session->disconnect();
     }
 

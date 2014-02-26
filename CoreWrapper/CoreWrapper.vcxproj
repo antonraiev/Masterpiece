@@ -64,7 +64,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Advapi32.lib;Shell32.lib;Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,7 +75,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Advapi32.lib;Shell32.lib;Core.lib;ArduinoRobot.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
