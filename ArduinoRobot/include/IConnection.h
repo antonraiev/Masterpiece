@@ -11,8 +11,9 @@ namespace Arduino
     class IConnection
     {
     protected:
-        virtual void send(const std::string &command) = 0;
-        virtual std::future<std::string> receive() const = 0;
+        virtual void executeCommand(const std::string &command) = 0;
+        virtual std::future<std::string> executeCommandWithOutput(
+            const std::string &command) const = 0;
 
         friend class Robot;
     };

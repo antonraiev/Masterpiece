@@ -3,7 +3,9 @@
 
 namespace Arduino
 {
-    enum class SensorType {TEMPERATURE_SENSOR, HUMIDITY_SENSOR,
+    enum class SensorType {
+        TEMPERATURE_SENSOR,
+        HUMIDITY_SENSOR,
         ULTRASONIC_SENSOR = 'u'};
 }
 

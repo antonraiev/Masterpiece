@@ -3,7 +3,6 @@
 #define LIBSSH_STATIC 1
 
 #include <libssh/libsshpp.hpp>
-#include <vector>
 
 namespace Arduino
 {
@@ -14,47 +13,42 @@ namespace Arduino
     {
         session->setOption(SSH_OPTIONS_HOST, hostName.c_str());
         session->setOption(SSH_OPTIONS_USER, login.c_str());
-        session->setOption(SSH_OPTIONS_PORT, 22);
         session->connect();
         session->userauthPassword(password.c_str());
-
-        channel.reset(new ssh::Channel(*session));
-        channel->openSession();
-        channel->requestPty("xterm");
-        channel->changePtySize(80, 25);
-        channel->requestShell();
     }
 
-    void SshConnection::send(const std::string &command)
+    void SshConnection::executeCommand(const std::string &command)
     {
-        channel->write(command.c_str(), command.length());
+        ssh::Channel channel(*session);
+        channel.openSession();
+        channel.requestExec(command.c_str());
+        channel.close();
+        channel.sendEof();
     }
 
-    std::future<std::string> SshConnection::receive() const
+    std::future<std::string> SshConnection::executeCommandWithOutput(
+        const std::string &command) const
     {
-        ssh::Channel &rawChannel = *channel.get();
+        static const size_t BUFFER_SIZE = 64;
+        ssh::Session *rawSession = session.get();
+
         return std::async(
-            [&rawChannel]() -> std::string
+            [&command, rawSession]() -> std::string
             {
+                std::unique_ptr<ssh::Channel> channel(
+                    new ssh::Channel(*rawSession));
+                channel->openSession();
+                channel->requestExec(command.c_str());
                 std::string result;
-                const size_t BUFFER_SIZE = 64;
-                std::vector<char> buffer;
-                buffer.reserve(BUFFER_SIZE);
-                while(rawChannel.isOpen() && !rawChannel.isEof()) {
-                    size_t bytesRead = rawChannel.read(&buffer, BUFFER_SIZE);
-                    result.append(buffer.begin(), buffer.begin() + bytesRead);
+                char buffer[BUFFER_SIZE];
+                while(channel->isOpen() && !channel->isEof()) {
+                    size_t bytesRead = channel->read(&buffer, BUFFER_SIZE);
+                    result.append(buffer, buffer + bytesRead);
                 }
-                rawChannel.close();
+                channel->sendEof();
+                channel->close();
                 return result;
             }
         );
     }
-
-    SshConnection::~SshConnection()
-    {
-        channel->close();
-        channel->sendEof();
-        session->disconnect();
-    }
-
 }

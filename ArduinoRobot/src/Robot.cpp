@@ -12,10 +12,10 @@ namespace Arduino
     void Robot::setControl(ControlType control)
     {
         std::string robotCommand(1, static_cast<char>(control));
-        std::stringstream command;
-        command << "echo '" << robotCommand << "' > /dev/ttyACM0";
-        std::string commandStr = command.str();
-        connection->send(commandStr);
+        std::stringstream commandStream;
+        commandStream << "echo " << robotCommand << " > /dev/ttyACM0";
+        std::string command = commandStream.str();
+        connection->executeCommand(command);
     }
 
     const std::string& Robot::getOutput()
@@ -25,6 +25,5 @@ namespace Arduino
 
     void Robot::update()
     {
-        output = connection->receive();
     }
 }
