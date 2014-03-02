@@ -9,7 +9,6 @@
 namespace ssh
 {
     class Session;
-    class Channel;
 }
 
 namespace Arduino
@@ -21,11 +20,12 @@ namespace Arduino
             const std::string &password);
         ~SshConnection();
 
-        void send(const std::string &command) override;
-        std::future<std::string> receive() const override;
+        void executeCommand(const std::string &command) override;
+        std::future<std::string> executeCommandWithOutput(
+            const std::string &command) const override;
     private:
         std::unique_ptr<ssh::Session> session;
-        std::unique_ptr<ssh::Channel> channel;
+
     };
 }
 

@@ -6,13 +6,23 @@
 #include <future>
 
 #include "IConnection.h"
+#include "Sensor.h"
 
 namespace Arduino
 {
-    enum class ControlType {MOVE_FORWARD_SLOW = 'S', MOVE_FORWARD_AVERAGE = 'A',
-        MOVE_FORWARD_FAST = '8', MOVE_BACKWARD_SLOW = 's',
-        MOVE_BACKWARD_AVERAGE = 'a', MOVE_BACKWARD_FAST = 'f', MOVE_LEFT = 'l',
-        MOVE_RIGHT = 'r', MOVE_STOP = '5'};
+enum ControlType
+{
+    MOVE_FORWARD_SLOW     = 'S',
+    MOVE_FORWARD_AVERAGE  = 'A',
+    MOVE_FORWARD_FAST     = 'F',
+    MOVE_BACKWARD_SLOW    = 's',
+    MOVE_BACKWARD_AVERAGE = 'a',
+    MOVE_BACKWARD_FAST    = 'f',
+    MOVE_RIGHT            = 'r',
+    MOVE_LEFT             = 'l',
+    MOVE_STOP             = 'x',
+};
+
 
     class Robot
     {
