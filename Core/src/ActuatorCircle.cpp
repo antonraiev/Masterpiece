@@ -4,8 +4,13 @@
 
 namespace Core
 {
-    ActuatorCircle::ActuatorCircle(double lowerBound, double upperBound, size_t actuatorCount,
-        size_t startDelay, size_t stopDelay)
+    ActuatorCircle::ActuatorCircle(
+        double lowerBound,
+        double upperBound,
+        size_t actuatorCount,
+        size_t startDelay,
+        size_t stopDelay
+    )
     {
         assert(lowerBound <= upperBound && "Upper bound is greater than lower bound");
 
@@ -15,8 +20,7 @@ namespace Core
         double deviation = std::fabs(upperBound - lowerBound) / 8.f;
         std::normal_distribution<double> normalDistribution(mean, deviation);
 
-        for(size_t i = 0; i < actuatorCount; ++i)
-        {
+        for(size_t i = 0; i < actuatorCount; ++i) {
             Actuator actuator(startDelay, stopDelay);
             double randomPosition = normalDistribution(mersenneTwisterEngine);
             actuators.push_back(std::make_pair(randomPosition, actuator));
@@ -30,12 +34,12 @@ namespace Core
 
     Actuator& ActuatorCircle::getActuator(size_t actuatorIndex)
     {
-        return actuators[actuatorIndex].second;
+        return actuators.at(actuatorIndex).second;
     }
 
     double ActuatorCircle::getActuatorRadius(size_t actuatorIndex)
     {
-        return actuators[actuatorIndex].first;
+        return actuators.at(actuatorIndex).first;
     }
 
     void ActuatorCircle::setDelay(size_t startDelay, size_t stopDelay)
@@ -46,14 +50,10 @@ namespace Core
 
     void ActuatorCircle::update(double currentRadius)
     {
-        for(size_t i = 0; i < actuators.size(); ++i)
-        {
-            if(actuators[i].first <= currentRadius)
-            {
+        for(size_t i = 0; i < actuators.size(); ++i) {
+            if(actuators[i].first <= currentRadius) {
                 actuators[i].second.update(1);
-            }
-            else
-            {
+            } else {
                 actuators[i].second.update(-1);
             }
         }
@@ -62,8 +62,7 @@ namespace Core
     int ActuatorCircle::getControl() const
     {
         int sum = 0;
-        for(size_t i = 0; i < actuators.size(); ++i)
-        {
+        for(size_t i = 0; i < actuators.size(); ++i) {
             sum += actuators[i].second.getControl();
         }
         return sum;

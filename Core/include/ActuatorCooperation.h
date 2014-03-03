@@ -11,10 +11,15 @@ namespace Core
     class ActuatorCooperation
     {
     public:
-        explicit ActuatorCooperation(double circleDiff, size_t positiveActuatorCount,
-            size_t negativeActuatorCount, size_t startDelay = 1, size_t stopDelay = 2);
+        explicit ActuatorCooperation(
+            double circleDiff,
+            size_t positiveActuatorCount,
+            size_t negativeActuatorCount,
+            size_t startDelay = 1,
+            size_t stopDelay = 2
+        );
+        
         size_t getCircleCount() const;
-
         ActuatorCircle& getPositiveCircle(size_t circleIndex);
         ActuatorCircle& getNegativeCircle(size_t circleIndex);
 

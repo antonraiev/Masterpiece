@@ -11,8 +11,13 @@ namespace Core
     class ActuatorCircle
     {
     public:
-        ActuatorCircle(double lowerBound, double upperBound, size_t actuatorCount,
-            size_t startDelay, size_t stopDelay);
+        ActuatorCircle(
+            double lowerBound,
+            double upperBound,
+            size_t actuatorCount,
+            size_t startDelay,
+            size_t stopDelay
+        );
 
         size_t getActuatorCount() const;
         Actuator& getActuator(size_t actuatorIndex);
