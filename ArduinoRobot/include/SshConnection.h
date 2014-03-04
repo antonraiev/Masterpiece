@@ -18,7 +18,6 @@ namespace Arduino
     public:
         SshConnection(const std::string &hostName, const std::string &login,
             const std::string &password);
-        ~SshConnection();
 
         void executeCommand(const std::string &command) override;
         std::future<std::string> executeCommandWithOutput(
