@@ -10,7 +10,7 @@ namespace Arduino
 
     class IConnection
     {
-    protected:
+    public:
         virtual void executeCommand(const std::string &command) = 0;
         virtual std::future<std::string> executeCommandWithOutput(
             const std::string &command) const = 0;
