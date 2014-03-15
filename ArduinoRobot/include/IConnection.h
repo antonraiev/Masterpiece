@@ -12,8 +12,9 @@ namespace Arduino
     {
     public:
         virtual void executeCommand(const std::string &command) = 0;
-        virtual std::future<std::string> executeCommandWithOutput(
-            const std::string &command) const = 0;
+
+        virtual void write(const std::string &text) = 0;
+        virtual std::string read() const = 0;
 
         friend class Robot;
     };
