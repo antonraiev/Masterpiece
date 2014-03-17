@@ -7,7 +7,7 @@ namespace Arduino
     Robot::Robot(std::unique_ptr<IConnection> connection) :
         connection(std::move(connection))
     {
-        connection->write("cat /dev/ttyACM0");
+        this->connection->write("cat /dev/ttyACM0");
     }
 
     void Robot::setControl(ControlType control)
